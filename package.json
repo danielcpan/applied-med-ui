@@ -14,10 +14,15 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^26.0.3",
+    "@types/lodash": "^4.14.157",
     "@types/node": "^14.0.14",
     "@types/react": "^16.9.41",
+    "@types/react-custom-scrollbars": "^4.0.6",
     "@types/react-dom": "^16.9.8",
+    "@types/react-query": "^1.1.2",
+    "@types/react-select": "^3.0.13",
     "@uppy/core": "^1.11.0",
+    "@uppy/dashboard": "^1.10.1",
     "@uppy/react": "^1.8.1",
     "date-fns": "^2.14.0",
     "lodash": "^4.17.15",
@@ -36,7 +41,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public --quiet "
+    "build-storybook": "build-storybook -s public --quiet"
   },
   "eslintConfig": {
     "extends": "react-app"

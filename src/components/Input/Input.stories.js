@@ -1,10 +1,10 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import Input from "./Input";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import Input from './Input';
 
 export default {
-  title: "Input",
-  component: Input,
+  title: 'Input',
+  component: Input
 };
 
 export const Basic = () => {

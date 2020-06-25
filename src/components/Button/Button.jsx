@@ -17,21 +17,6 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.teal.digital70,
       color: theme.palette.common.white
     },
-    // '&:focus': {
-    //   backgroundColor: theme.palette.teal.digital70,
-    //   color: theme.palette.common.white
-    // },
-    // '&:focus:after': {
-    //   borderRadius: 4,
-    //   padding: 0,
-    //   border: '0.5px solid #727678',
-    //   position: 'absolute',
-    //   content: '""',
-    //   top: 2,
-    //   left: 2,
-    //   bottom: 2,
-    //   right: 2
-    // },
     '&:disabled': {
       color: theme.palette.grey.disabledBtnText,
       backgroundColor: theme.palette.grey.disabledButton

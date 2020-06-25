@@ -2,7 +2,6 @@ import Async from './Async/Async';
 import Button from './Button/Button';
 import Loading from './Loading/Loading';
 import ServerError from './ServerError/ServerError';
-import Wizard from './Wizard';
 import DelayedRender from './DelayedRender/DelayedRender';
 
 import FormField from './FormField/FormField';
@@ -19,7 +18,6 @@ export {
   Button,
   Loading,
   ServerError,
-  Wizard,
   DelayedRender,
   FormField,
   // Form Input Components

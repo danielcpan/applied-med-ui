@@ -9,7 +9,7 @@ export const getHookVals = ({ queries, mutations }) => {
   const mutationVals = Object.values(mutations);
   const hookVals = [...queryVals, ...mutationVals];
 
-  return { hookVals, queryVals, mutationVals, hookVals };
+  return { hookVals, queryVals, mutationVals };
 };
 
 export const getComponentIsLoading = ({ isLoading, hookVals }) => {

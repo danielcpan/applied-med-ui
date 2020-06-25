@@ -1,6 +1,4 @@
-import { QueryResultBase } from '@types/react-query';
-
-export const getIsLoading = (hook: QueryResultBase<[]>): boolean => {
+export const getIsLoading = hook => {
   if (Array.isArray(hook)) {
     return hook.some(el => el.status === 'loading');
   }
@@ -8,7 +6,7 @@ export const getIsLoading = (hook: QueryResultBase<[]>): boolean => {
   return hook.status === 'loading';
 };
 
-export const getIsFetching = (hook: QueryResultBase<[]>): boolean => {
+export const getIsFetching = hook => {
   if (Array.isArray(hook)) {
     return hook.some(el => el.isFetching);
   }
@@ -16,7 +14,7 @@ export const getIsFetching = (hook: QueryResultBase<[]>): boolean => {
   return hook.isFetching;
 };
 
-export const getHasError = (hook: QueryResultBase<[]>): boolean => {
+export const getHasError = hook => {
   if (Array.isArray(hook)) {
     return hook.some(el => el.error);
   }
@@ -24,7 +22,7 @@ export const getHasError = (hook: QueryResultBase<[]>): boolean => {
   return !!hook.error;
 };
 
-export const getHasData = (hook: QueryResultBase<[]>): boolean => {
+export const getHasData = hook => {
   if (Array.isArray(hook)) {
     return hook.every(el => el.data);
   }
@@ -32,7 +30,7 @@ export const getHasData = (hook: QueryResultBase<[]>): boolean => {
   return !!hook.data;
 };
 
-export const getErrors = (hook: QueryResultBase<[]>): unknown => {
+export const getErrors = hook => {
   if (Array.isArray(hook)) {
     return hook.reduce((acc, el) => {
       if (el.error) acc.push(el.error);

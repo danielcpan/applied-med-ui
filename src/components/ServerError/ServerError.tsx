@@ -12,14 +12,14 @@ export const useStyles = makeStyles(() => ({
 }));
 
 interface IServerError {
-  errors?: [object];
+  errors?: any[];
   errorMsg?: string;
   isFullPageCenter: boolean;
 }
 
 const ServerError: React.FC<IServerError> = ({ errors, isFullPageCenter = false }) => {
   // const history = useHistory();
-  const classes = useStyles();
+  // const classes = useStyles();
   const error = errors?.[0]?.response;
   const errorMsg = `Error ${error?.status}: ${error?.statusText}`;
 

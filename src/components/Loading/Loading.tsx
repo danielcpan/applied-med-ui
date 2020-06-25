@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Grid, CircularProgress, Typography } from '@material-ui/core';
+import React from 'react';
+import { Grid, CircularProgress } from '@material-ui/core';
 import { DelayedRender } from 'components';
-import { useInterval } from 'hooks';
 
 type LoadingProps = {
   isFullPageCenter: boolean;
@@ -10,22 +9,7 @@ type LoadingProps = {
   delay: number;
 };
 
-const Loading: React.FC<LoadingProps> = ({ isFullPageCenter = false, message = '', delay }) => {
-  const [timer, setTimer] = useState(0);
-  const [displayMessage, setDisplayMessage] = useState(message);
-
-  useInterval(
-    () => {
-      setTimer(prevState => prevState + 1);
-      if (timer === 15) {
-        setDisplayMessage("Hmmm, something isn't right...");
-      } else if (timer === 30) {
-        setDisplayMessage('Sorry for taking so long. Try refreshing the page!');
-      }
-    },
-    timer < 30 ? 1000 : null
-  );
-
+const Loading: React.FC<LoadingProps> = ({ isFullPageCenter = false, delay }) => {
   return (
     <DelayedRender delay={delay}>
       <Grid
@@ -35,14 +19,10 @@ const Loading: React.FC<LoadingProps> = ({ isFullPageCenter = false, message = '
         style={{
           height: '100%',
           textAlign: 'center',
-          minHeight: displayMessage ? 90 : 70,
           marginTop: isFullPageCenter ? -64 : 'auto'
         }}
       >
-        <div>
-          <CircularProgress />
-          <Typography variant="h6">{displayMessage}</Typography>
-        </div>
+        <CircularProgress />
       </Grid>
     </DelayedRender>
   );

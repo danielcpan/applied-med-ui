@@ -29,7 +29,7 @@ const Select: React.FC<ISelect> = ({ name, options, form: { control, errors }, .
         error={error}
         components={animatedComponents}
         styles={{
-          control: provided => ({
+          control: (provided: any) => ({
             ...provided,
             border: error && '1px solid red'
           })

@@ -1,4 +1,3 @@
-import useInterval from './useInterval';
 import useDelayedRender from './useDelayedRender';
 
-export { useInterval, useDelayedRender };
+export { useDelayedRender }; // eslint-disable-line import/prefer-default-export
