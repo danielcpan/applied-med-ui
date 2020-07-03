@@ -4,7 +4,7 @@ export default [
   {
     input: "src/index.ts",
     output: {
-      name: "applied-med-ui",
+      name: "@danielcpan/applied-med-ui",
       file: "dist/main.js",
       format: "cjs",
     },
