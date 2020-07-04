@@ -1,1 +1,2 @@
-// export { default as Button } from "./Button";
+export { default as DelayedRender } from './DelayedRender/DelayedRender';
+export * from './Loading';
