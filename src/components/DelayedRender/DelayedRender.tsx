@@ -1,4 +1,4 @@
-import { useDelayedRender } from '../../hooks';
+import { useDelayedRender } from 'hooks';
 
 type DelayedRenderProps = {
   delay?: number;

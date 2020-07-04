@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
-import { DelayedRender } from '../../components';
+import { DelayedRender } from 'components';
 
 type LoadingProps = {
   isFullPageCenter: boolean;
