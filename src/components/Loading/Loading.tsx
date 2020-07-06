@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import { DelayedRender } from 'components';
+import { theme as customTheme } from 'styles';
 
 type LoadingProps = {
   isFullPageCenter: boolean;
@@ -17,6 +18,8 @@ const Loading: React.FC<LoadingProps> = ({
   ...restProps
 }) => {
   const theme = useTheme();
+  console.log('theme inside lib:', theme);
+  console.log('customTheme:', customTheme);
 
   return (
     <DelayedRender delay={delay}>
