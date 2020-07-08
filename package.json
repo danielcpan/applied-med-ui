@@ -6,11 +6,9 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    "./": "dist/"
-  },
   "types": "dist/index.d.ts",
   "scripts": {
+    "prebuild": "rm -rf dist",
     "build": "rollup -c",
     "watch": "rollup -cw",
     "lint": "eslint  --fix src --ext .js,.jsx,.ts,.tsx"

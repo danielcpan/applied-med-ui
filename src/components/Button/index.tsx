@@ -26,11 +26,11 @@ const useStyles = makeStyles((theme: TTheme) => ({
   }
 }));
 
-const Button = ({ children, ...props }) => {
+const Button: React.FC = ({ children, ...restProps }) => {
   const classes = useStyles();
 
   return (
-    <MuiButton {...props} disableElevation classes={{ root: classes.root }}>
+    <MuiButton disableElevation classes={{ root: classes.root }} {...restProps}>
       {children}
     </MuiButton>
   );

@@ -1,7 +1,7 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { TTheme } from './types';
 
-const config: TTheme = {
+const lightThemeConfig: TTheme = {
   palette: {
     primary: {
       main: '#0095A0'
@@ -46,6 +46,5 @@ const config: TTheme = {
   }
 };
 
-const theme = responsiveFontSizes(createMuiTheme(config));
-
-export default theme;
+export const lightTheme = responsiveFontSizes(createMuiTheme(lightThemeConfig));
+// TODO: Dark theme?

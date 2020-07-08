@@ -21,23 +21,57 @@ const external = [
 ];
 
 export default [
+  // {
+  //   input: [
+  //     'src/index.ts',
+  //     'src/components/index.ts',
+  //     'src/hooks/index.ts',
+  //     'src/styles/index.ts',
+  //     'src/utils/index.ts',
+  //     'src/icons/index.ts'
+  //   ],
+  //   output: [
+  //     {
+  //       dir: 'dist',
+  //       format: 'esm',
+  //       sourcemap: true
+  //     }
+  //   ],
+  //   preserveModules: true,
+  //   plugins,
+  //   external
+  // }
   {
-    input: [
-      'src/index.ts',
-      'src/components/index.ts',
-      'src/hooks/index.ts',
-      'src/styles/index.ts',
-      'src/utils/index.ts',
-      'src/icons/index.ts'
-    ],
+    input: 'src/components/index.ts',
     output: [
       {
-        dir: 'dist',
+        file: 'dist/components/index.esm.js',
         format: 'esm',
+        sourcemap: true
+      },
+      {
+        file: 'dist/components/index.cjs.js',
+        format: 'cjs',
         sourcemap: true
       }
     ],
-    preserveModules: true,
+    plugins,
+    external
+  },
+  {
+    input: 'src/styles/index.ts',
+    output: [
+      {
+        file: 'dist/styles/index.esm.js',
+        format: 'esm',
+        sourcemap: true
+      },
+      {
+        file: 'dist/styles/index.cjs.js',
+        format: 'cjs',
+        sourcemap: true
+      }
+    ],
     plugins,
     external
   }
