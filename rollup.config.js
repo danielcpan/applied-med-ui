@@ -33,7 +33,7 @@ export default [
   //   output: [
   //     {
   //       dir: 'dist',
-  //       format: 'esm',
+  //       format: 'cjs',
   //       sourcemap: true
   //     }
   //   ],
@@ -50,7 +50,7 @@ export default [
         sourcemap: true
       },
       {
-        file: 'dist/components/index.cjs.js',
+        file: 'dist/components/index.js',
         format: 'cjs',
         sourcemap: true
       }
@@ -67,7 +67,7 @@ export default [
         sourcemap: true
       },
       {
-        file: 'dist/styles/index.cjs.js',
+        file: 'dist/styles/index.js',
         format: 'cjs',
         sourcemap: true
       }
