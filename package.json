@@ -1,6 +1,6 @@
 {
-  "name": "@danielcpan/applied-med-ui",
-  "version": "1.9.1",
+  "name": "@applied-med/ui",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "files": [
