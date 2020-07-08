@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const isString = el => typeof el === 'string' || el instanceof String;
 
-const getItem = itemKey => {
+const getItem = (itemKey: string) => {
   return localStorage.getItem(itemKey);
 };
 
@@ -10,7 +10,7 @@ const clearAll = () => {
   localStorage.clear();
 };
 
-const useLocalStorage = (key, initialValue = {}) => {
+const useLocalStorage = (key: string, initialValue = {}) => {
   if (!isString(key)) throw new Error('Key must be of type string!');
 
   const [storedValue, setStoredValue] = useState(() => {

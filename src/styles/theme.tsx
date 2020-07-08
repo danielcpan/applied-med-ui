@@ -1,9 +1,5 @@
-import { createMuiTheme, responsiveFontSizes, Theme, ThemeOptions } from '@material-ui/core/styles';
-
-type TTheme = {
-  palette: any;
-  props: any;
-};
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { TTheme } from './types';
 
 const config: TTheme = {
   palette: {
@@ -50,4 +46,6 @@ const config: TTheme = {
   }
 };
 
-export const theme = responsiveFontSizes(createMuiTheme(config));
+const theme = responsiveFontSizes(createMuiTheme(config));
+
+export default theme;
