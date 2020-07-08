@@ -17,7 +17,6 @@ interface ILoadingOverlay {
 
 const LoadingOverlay: React.FC<ILoadingOverlay> = ({ delay = 200, children, ...restProps }) => {
   const theme = useTheme();
-  console.log('theme:', theme);
 
   return (
     <>
