@@ -5,13 +5,14 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
-const extensions = ['.js', '.jsx', '.ts', '.tsx'];
-const input = 'src/index.ts';
-
 const plugins = [
+  peerDepsExternal(),
+  nodeResolve(),
+  commonjs(),
   typescript({
     typescript: require('typescript')
-  })
+  }),
+  terser()
 ];
 
 const external = [
@@ -19,48 +20,45 @@ const external = [
   ...Object.keys(pkg.peerDependencies || {})
 ];
 
-// export default [
-//   {
-//     input,
-//     output: {
-//       file: pkg.module,
-//       format: 'esm',
-//       sourcemap: true
-//     },
-//     plugins,
-//     external
-//   },
-//   {
-//     input,
-//     output: {
-//       file: pkg.main,
-//       format: 'cjs',
-//       sourcemap: true
-//     },
-//     plugins,
-//     external
-//   }
-// ];
-
 export default [
   {
-    input: ['src/index.ts', 'src/components/index.ts'],
+    input: [
+      'src/index.ts',
+      'src/components/index.ts',
+      'src/hooks/index.ts',
+      'src/styles/index.ts',
+      'src/utils/index.ts',
+      'src/icons/index.ts'
+    ],
     output: [
       {
         dir: 'dist',
-        format: 'cjs',
+        format: 'esm',
         sourcemap: true
       }
     ],
     preserveModules: true,
-    plugins: [
-      peerDepsExternal(),
-      nodeResolve(),
-      commonjs(),
-      typescript({
-        typescript: require('typescript')
-      }),
-      terser()
-    ]
+    plugins,
+    external
   }
+  // {
+  //   input: 'src/index.ts',
+  //   output: {
+  //     file: pkg.module,
+  //     format: 'esm',
+  //     sourcemap: true
+  //   },
+  //   plugins,
+  //   external
+  // },
+  // {
+  //   input: 'src/index.ts',
+  //   output: {
+  //     file: pkg.main,
+  //     format: 'cjs',
+  //     sourcemap: true
+  //   },
+  //   plugins,
+  //   external
+  // }
 ];
