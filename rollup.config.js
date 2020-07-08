@@ -1,8 +1,9 @@
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import resolve from '@rollup/plugin-node-resolve';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import { terser } from 'rollup-plugin-terser';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const input = 'src/index.ts';
@@ -53,12 +54,13 @@ export default [
     ],
     preserveModules: true,
     plugins: [
-      // peerDepsExternal(),
-      // resolve(),
-      // commonjs(),
+      peerDepsExternal(),
+      nodeResolve(),
+      commonjs(),
       typescript({
         typescript: require('typescript')
-      })
+      }),
+      terser()
     ]
   }
 ];
