@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const isString = el => typeof el === 'string' || el instanceof String;
+const isString = (el: any) => typeof el === 'string' || el instanceof String;
 
 const getItem = (itemKey: string) => {
   return localStorage.getItem(itemKey);
@@ -24,7 +24,7 @@ const useLocalStorage = (key: string, initialValue = {}) => {
     }
   });
 
-  const setValue = value => {
+  const setValue = (value: any) => {
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
 

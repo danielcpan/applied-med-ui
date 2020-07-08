@@ -1,4 +1,4 @@
-export const getIsLoading = (hook): boolean => {
+export const getIsLoading = (hook: any): boolean => {
   if (Array.isArray(hook)) {
     return hook.some(el => el.status === 'loading');
   }
@@ -6,7 +6,7 @@ export const getIsLoading = (hook): boolean => {
   return hook.status === 'loading';
 };
 
-export const getIsFetching = (hook): boolean => {
+export const getIsFetching = (hook: any): boolean => {
   if (Array.isArray(hook)) {
     return hook.some(el => el.isFetching);
   }
@@ -14,7 +14,7 @@ export const getIsFetching = (hook): boolean => {
   return hook.isFetching;
 };
 
-export const getHasError = (hook): boolean => {
+export const getHasError = (hook: any): boolean => {
   if (Array.isArray(hook)) {
     return hook.some(el => el.error);
   }
@@ -22,7 +22,7 @@ export const getHasError = (hook): boolean => {
   return !!hook.error;
 };
 
-export const getHasData = (hook): boolean => {
+export const getHasData = (hook: any): boolean => {
   if (Array.isArray(hook)) {
     return hook.every(el => el.data);
   }
@@ -30,7 +30,7 @@ export const getHasData = (hook): boolean => {
   return !!hook.data;
 };
 
-export const getErrors = (hook): unknown => {
+export const getErrors = (hook: any): unknown => {
   if (Array.isArray(hook)) {
     return hook.reduce((acc, el) => {
       if (el.error) acc.push(el.error);
