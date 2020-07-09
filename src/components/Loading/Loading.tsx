@@ -4,8 +4,8 @@ import { DelayedRender } from 'components';
 import { useInterval } from 'hooks';
 
 type LoadingProps = {
-  message: string;
-  delay: number;
+  message?: string;
+  delay?: number;
 };
 
 const Loading: React.FC<LoadingProps> = ({ message = '', delay = 200, children, ...restProps }) => {
