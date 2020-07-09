@@ -21,40 +21,21 @@ const external = [
 ];
 
 export default [
-  // {
-  //   input: [
-  //     'src/index.ts',
-  //     'src/components/index.ts',
-  //     'src/hooks/index.ts',
-  //     'src/styles/index.ts',
-  //     'src/utils/index.ts',
-  //     'src/icons/index.ts'
-  //   ],
-  //   output: [
-  //     {
-  //       dir: 'dist',
-  //       format: 'cjs',
-  //       sourcemap: true
-  //     }
-  //   ],
-  //   preserveModules: true,
-  //   plugins,
-  //   external
-  // }
   {
     input: 'src/components/index.ts',
     output: [
       {
-        file: 'dist/components/index.esm.js',
-        format: 'esm',
+        dir: 'dist/components',
+        format: 'cjs',
         sourcemap: true
       },
       {
-        file: 'dist/components/index.js',
-        format: 'cjs',
+        dir: 'dist/components',
+        format: 'esm',
         sourcemap: true
       }
     ],
+    // preserveModules: true,
     plugins,
     external
   },
@@ -62,37 +43,72 @@ export default [
     input: 'src/styles/index.ts',
     output: [
       {
-        file: 'dist/styles/index.esm.js',
-        format: 'esm',
+        dir: 'dist/styles',
+        format: 'cjs',
         sourcemap: true
       },
       {
-        file: 'dist/styles/index.js',
-        format: 'cjs',
+        dir: 'dist/styles',
+        format: 'esm',
         sourcemap: true
       }
     ],
+    // preserveModules: true,
     plugins,
     external
-  }
+  },
   // {
-  //   input: 'src/index.ts',
-  //   output: {
-  //     file: pkg.module,
-  //     format: 'esm',
-  //     sourcemap: true
-  //   },
+  //   input: 'src/components/index.ts',
+  //   output: [
+  //     {
+  //       file: 'components/index.esm.js',
+  //       format: 'esm',
+  //       sourcemap: true
+  //     },
+  //     {
+  //       file: 'components/index.js',
+  //       format: 'cjs',
+  //       sourcemap: true
+  //     }
+  //   ],
   //   plugins,
   //   external
   // },
   // {
-  //   input: 'src/index.ts',
-  //   output: {
-  //     file: pkg.main,
-  //     format: 'cjs',
-  //     sourcemap: true
-  //   },
+  //   input: 'src/styles/index.ts',
+  //   output: [
+  //     {
+  //       file: 'styles/index.esm.js',
+  //       format: 'esm',
+  //       sourcemap: true
+  //     },
+  //     {
+  //       file: 'styles/index.js',
+  //       format: 'cjs',
+  //       sourcemap: true
+  //     }
+  //   ],
   //   plugins,
   //   external
-  // }
+  // },
+  {
+    input: 'src/index.ts',
+    output: {
+      file: pkg.module,
+      format: 'esm',
+      sourcemap: true
+    },
+    plugins,
+    external
+  },
+  {
+    input: 'src/index.ts',
+    output: {
+      file: pkg.main,
+      format: 'cjs',
+      sourcemap: true
+    },
+    plugins,
+    external
+  }
 ];
