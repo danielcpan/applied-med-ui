@@ -1,7 +1,8 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { StylesProvider, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { addDecorator } from '@storybook/react';
+import { StylesProvider, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import centered from '@storybook/addon-centered/react';
 import { lightTheme } from '../src/styles';
 
 const StylesDecorator = storyFn => (
@@ -14,3 +15,4 @@ const StylesDecorator = storyFn => (
 );
 
 addDecorator(StylesDecorator);
+addDecorator(centered);

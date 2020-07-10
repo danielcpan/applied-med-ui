@@ -3,12 +3,12 @@ import { Grid, CircularProgress, Typography } from '@material-ui/core';
 import { DelayedRender } from 'components';
 import { useInterval } from 'hooks';
 
-type LoadingProps = {
+interface ILoading {
   message?: string;
   delay?: number;
-};
+}
 
-const Loading: React.FC<LoadingProps> = ({ message = '', delay = 200, children, ...restProps }) => {
+const Loading: React.FC<ILoading> = ({ message = '', delay = 200, children, ...restProps }) => {
   const [timer, setTimer] = useState(0);
   const [displayMessage, setDisplayMessage] = useState(message);
 

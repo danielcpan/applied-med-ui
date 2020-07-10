@@ -19,9 +19,13 @@ module.exports = {
         {
           loader: require.resolve('ts-loader')
         },
-        // Optional
         {
-          loader: require.resolve('react-docgen-typescript-loader')
+          loader: require.resolve('react-docgen-typescript-loader'),
+          options: {
+            // Provide the path to your tsconfig.json so that your stories can
+            // display types from outside each individual story.
+            tsconfigPath: path.resolve(__dirname, '../tsconfig.json')
+          }
         }
       ]
     });

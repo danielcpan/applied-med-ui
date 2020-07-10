@@ -22,18 +22,21 @@
     "@material-ui/core": "^4.11.0",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-hook-form": "^6.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@material-ui/core": "^4.11.0",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-centered": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
     "@storybook/addon-info": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/react": "^5.3.19",
+    "@types/lodash": "^4.14.157",
     "@types/react": "^16.9.41",
     "@typescript-eslint/eslint-plugin": "^3.5.0",
     "@typescript-eslint/parser": "^3.5.0",
@@ -47,6 +50,8 @@
     "react": "^16.13.1",
     "react-docgen-typescript-loader": "^3.7.2",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.0.2",
+    "react-is": "^16.13.1",
     "rollup": "^2.18.2",
     "rollup-plugin-peer-deps-external": "^2.2.3",
     "rollup-plugin-terser": "^6.1.0",
@@ -55,5 +60,8 @@
     "tslib": "^2.0.0",
     "typescript": "^3.9.6"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@date-io/date-fns": "^2.6.2",
+    "@material-ui/pickers": "^3.2.10"
+  }
 }
