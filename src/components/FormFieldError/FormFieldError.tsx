@@ -6,6 +6,9 @@ interface IFormFieldError {
   error?: Error;
 }
 
+/**
+ * Form field helper component that displays field error
+ */
 const FormFieldError: React.FC<IFormFieldError> = ({ error = {} }) => {
   const theme = useTheme();
 

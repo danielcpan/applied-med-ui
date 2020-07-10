@@ -1,12 +1,25 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import _ from 'lodash';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, UseFormMethods, ValidationRules } from 'react-hook-form';
 import { TextField as MuiTextField } from '@material-ui/core';
-import { FormFieldError, FieldProps } from 'components';
+import { FormFieldError } from 'components';
 
-const Input: React.FC<FieldProps> = ({ name, form, rules, ...restProps }) => {
-  const context = useFormContext();
-  const { control, errors } = useMemo(() => ({ ...form, ...context }), []);
+type InputProps = {
+  /** Registered field name in useForm */
+  name: string;
+  /** Optional if using FormContext */
+  form?: UseFormMethods<any>;
+  /** Validations rules */
+  rules?: ValidationRules;
+};
+
+/**
+ * Uses `react-hook-form` for form data management
+ * and `material-ui/core/TextField` as base component
+ */
+const Input: React.FC<InputProps> = ({ name, form = {}, rules, ...restProps }) => {
+  const context = useFormContext() || {};
+  const { control, errors } = { ...form, ...context };
   const error = _.get(errors, name);
 
   return (

@@ -1,13 +1,26 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import _ from 'lodash';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, UseFormMethods, ValidationRules } from 'react-hook-form';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import { FormFieldError, FieldProps } from 'components';
+import { FormFieldError } from 'components';
 
-const DatePicker: React.FC<FieldProps> = ({ name, form, rules, ...restProps }) => {
-  const context = useFormContext();
-  const { control, errors } = useMemo(() => ({ ...form, ...context }), []);
+type DatePickerProps = {
+  /** Registered field name in useForm */
+  name: string;
+  /** Optional if using FormContext */
+  form?: UseFormMethods<any>;
+  /** Validations rules */
+  rules?: ValidationRules;
+};
+
+/**
+ * Uses `react-hook-form` for form data management
+ * and `material-ui/pickers/KeyboardDatePicker` as base component
+ */
+const DatePicker: React.FC<DatePickerProps> = ({ name, form = {}, rules, ...restProps }) => {
+  const context = useFormContext() || {};
+  const { control, errors } = { ...form, ...context };
   const error = _.get(errors, name);
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Flexible render fn
-export const render = (Comp: any, props: any) => {
+export const flexRender = (Comp: any, props: any) => {
   return isReactComponent(Comp) ? <Comp {...props} /> : Comp;
 };
 

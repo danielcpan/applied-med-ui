@@ -12,3 +12,4 @@ export const Default = () => <Loading />;
 export const WithMessage = () => <Loading message="Loading custom message!" />;
 
 export const Overlay = () => <LoadingOverlay>child content</LoadingOverlay>;
+export const Overlay2 = () => <LoadingOverlay>child content2</LoadingOverlay>;

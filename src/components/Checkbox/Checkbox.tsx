@@ -1,31 +1,43 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import _ from 'lodash';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, UseFormMethods } from 'react-hook-form';
 import {
   Typography,
   FormControlLabel as MuiFormControlLabel,
   Checkbox as MuiCheckbox
 } from '@material-ui/core';
-import { FormFieldError, FieldProps } from 'components';
+import { FormFieldError } from 'components';
 import { withStyles } from '@material-ui/core/styles';
 
-const FormControlLabel = withStyles({
+const FormControlLabel = withStyles(theme => ({
   root: {
     display: 'flex'
   },
-  formControlLabel: {
-    paddingTop: 9
+  label: {
+    paddingTop: theme.spacing(1)
   }
-})(MuiFormControlLabel);
+}))(MuiFormControlLabel);
 
-type CheckBoxProps = FieldProps & {
+type CheckBoxProps = {
+  /** Registered field name in useForm */
+  name: string;
+  /** Optional if using FormContext */
+  form?: UseFormMethods<any>;
+  /** Checkbox specific label */
   label: string;
+  /** Checkbox specific description */
   description?: string;
 };
 
-const Checkbox: React.FC<CheckBoxProps> = ({ name, form, label, description, ...restProps }) => {
-  const context = useFormContext();
-  const { control, errors } = useMemo(() => ({ ...form, ...context }), []);
+const Checkbox: React.FC<CheckBoxProps> = ({
+  name,
+  form = {},
+  label,
+  description,
+  ...restProps
+}) => {
+  const context = useFormContext() || {};
+  const { control, errors } = { ...form, ...context };
   const error = _.get(errors, name);
 
   return (
@@ -50,6 +62,7 @@ const Checkbox: React.FC<CheckBoxProps> = ({ name, form, label, description, ...
             }
           />
         }
+        type="checkbox"
         name={name}
         control={control}
         style={{ marginLeft: 0, alignItems: 'flex-start' }}

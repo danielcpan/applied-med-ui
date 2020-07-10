@@ -2,7 +2,7 @@ import React from 'react';
 import { Backdrop as MuiBackdrop, CircularProgress } from '@material-ui/core';
 import { withStyles, useTheme } from '@material-ui/core/styles';
 import { DelayedRender } from 'components';
-import { render } from 'utils/general.utils';
+import { flexRender } from 'utils/general.utils';
 
 const StyledMuiBackdrop = withStyles(theme => ({
   root: {
@@ -25,7 +25,7 @@ const LoadingOverlay: React.FC<ILoadingOverlay> = ({ delay = 200, children, ...r
           <CircularProgress style={{ marginLeft: theme.spacing(9) }} />
         </StyledMuiBackdrop>
       </DelayedRender>
-      {render(children, restProps)}
+      {flexRender(children, restProps)}
     </>
   );
 };
