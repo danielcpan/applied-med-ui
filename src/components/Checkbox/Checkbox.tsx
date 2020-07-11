@@ -1,24 +1,23 @@
 import React from 'react';
-import _ from 'lodash';
-import { Controller, useFormContext, UseFormMethods } from 'react-hook-form';
+import { useFormContext, UseFormMethods } from 'react-hook-form';
 import {
   Typography,
   FormControlLabel as MuiFormControlLabel,
   Checkbox as MuiCheckbox
 } from '@material-ui/core';
-import { FormFieldError } from 'components';
 import { withStyles } from '@material-ui/core/styles';
 
 const FormControlLabel = withStyles(theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    alignItems: 'end'
   },
   label: {
     paddingTop: theme.spacing(1)
   }
 }))(MuiFormControlLabel);
 
-type CheckBoxProps = {
+interface ICheckBox {
   /** Registered field name in useForm */
   name: string;
   /** Optional if using FormContext */
@@ -27,49 +26,30 @@ type CheckBoxProps = {
   label: string;
   /** Checkbox specific description */
   description?: string;
-};
+}
 
-const Checkbox: React.FC<CheckBoxProps> = ({
-  name,
-  form = {},
-  label,
-  description,
-  ...restProps
-}) => {
+const Checkbox: React.FC<ICheckBox> = ({ name, form = {}, label, description, ...restProps }) => {
   const context = useFormContext() || {};
-  const { control, errors } = { ...form, ...context };
-  const error = _.get(errors, name);
+  const { register } = { ...form, ...context };
 
   return (
-    <>
-      <Controller
-        as={
-          <FormControlLabel
-            control={<MuiCheckbox color="primary" {...restProps} />}
-            label={
-              <>
-                <Typography>{label}</Typography>
-                {description && (
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    style={{ fontStyle: 'italic', fontWeight: 300 }}
-                  >
-                    {description}
-                  </Typography>
-                )}
-              </>
-            }
-          />
-        }
-        type="checkbox"
-        name={name}
-        control={control}
-        style={{ marginLeft: 0, alignItems: 'flex-start' }}
-      />
-
-      <FormFieldError error={error} />
-    </>
+    <FormControlLabel
+      control={<MuiCheckbox inputRef={register} name={name} color="primary" {...restProps} />}
+      label={
+        <>
+          <Typography>{label}</Typography>
+          {description && (
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              style={{ fontStyle: 'italic', fontWeight: 300 }}
+            >
+              {description}
+            </Typography>
+          )}
+        </>
+      }
+    />
   );
 };
 

@@ -17,6 +17,8 @@ export default {
 export const Default = () => {
   const form = useForm({ defaultValues: { hasAgreement: false } });
 
+  console.log('form.watch():', form.watch());
+
   return (
     <form
       onSubmit={form.handleSubmit(data => {
@@ -30,6 +32,13 @@ export const Default = () => {
         description="You agree to all terms and conditions"
       />
       <pre>{JSON.stringify({ values: { ...form.watch() }, ...form.formState }, null, 2)}</pre>
+      <button
+        onClick={form.handleSubmit(data => {
+          alert(JSON.stringify(data));
+        })}
+      >
+        Submit
+      </button>
     </form>
   );
 };
@@ -57,12 +66,22 @@ export const WithFormContext = () => {
 
 export const WithCheckboxGroup = () => {
   const form = useForm({
-    defaultValues: { favoriteColors: { red: false, green: false, blue: false } }
+    // defaultValues: { favoriteColors: { red: false, green: false, blue: false } }
+    defaultValues: {
+      justifications: { feasibilityStudy: false, equipment: false, area: false, other: false }
+    }
   });
+  // const options = [
+  //   { name: 'red', label: 'Red' },
+  //   { name: 'green', label: 'Green' },
+  //   { name: 'blue', label: 'Blue' }
+  // ];
+
   const options = [
-    { name: 'red', label: 'Red' },
-    { name: 'green', label: 'Green' },
-    { name: 'blue', label: 'Blue' }
+    { name: 'feasibilityStudy', label: 'Feasibility Study' },
+    { name: 'equipment', label: 'Transfer/Move/Addition of Equipment' },
+    { name: 'area', label: 'Area or Room Restoration/Reconfiguration/Addition' },
+    { name: 'other', label: 'Other' }
   ];
 
   return (
@@ -72,20 +91,22 @@ export const WithCheckboxGroup = () => {
           alert(JSON.stringify(data));
         })}
       >
-        <FormField label="Favorite Colors" description="Pick your favorite colors!">
+        <FormField label="Justification">
+          {/* {options.map(el => (
+            <Checkbox key={el.name} name={`justifications[${el.name}]`} label={el.label} />
+          ))} */}
           <CheckboxGroup
-            name="favoriteColors"
+            name="justifications"
             rules={{
               validate: () => {
-                const groupValues = getFormGroupValues(form.getValues(), 'favoriteColors');
-                console.log('groupValues:', groupValues);
-
+                const groupValues = getFormGroupValues(form.getValues(), 'justifications');
+                console.log('groupal:', groupValues);
                 return !!Object.values(groupValues).some(el => !!el) || 'Required';
               }
             }}
           >
             {options.map(el => (
-              <Checkbox key={el.name} name={`favoriteColors[${el.name}]`} label={el.label} />
+              <Checkbox key={el.name} name={`justifications[${el.name}]`} label={el.label} />
             ))}
           </CheckboxGroup>
         </FormField>

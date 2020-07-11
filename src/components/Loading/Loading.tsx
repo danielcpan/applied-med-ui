@@ -4,10 +4,15 @@ import { DelayedRender } from 'components';
 import { useInterval } from 'hooks';
 
 interface ILoading {
+  /** Custom loading message available */
   message?: string;
+  /** Delay in milliseconds */
   delay?: number;
 }
 
+/**
+ * Loading indicator. Preconfigured with messages for long loads.
+ */
 const Loading: React.FC<ILoading> = ({ message = '', delay = 200, children, ...restProps }) => {
   const [timer, setTimer] = useState(0);
   const [displayMessage, setDisplayMessage] = useState(message);

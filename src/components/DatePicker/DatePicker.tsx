@@ -26,7 +26,10 @@ const DatePicker: React.FC<DatePickerProps> = ({ name, form = {}, rules, ...rest
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Controller
-        as={
+        name={name}
+        control={control}
+        rules={rules}
+        render={({ onChange, value }) => (
           <KeyboardDatePicker
             clearable
             disableToolbar
@@ -35,14 +38,11 @@ const DatePicker: React.FC<DatePickerProps> = ({ name, form = {}, rules, ...rest
             format="MM/dd/yyyy"
             margin="dense"
             fullWidth
-            onChange={() => {}} // eslint-disable-line @typescript-eslint/no-empty-function
-            value={() => {}} // eslint-disable-line @typescript-eslint/no-empty-function
-            {...restProps}
+            onChange={onChange}
+            value={value}
           />
-        }
-        name={name}
-        control={control}
-        rules={rules}
+        )}
+        {...restProps}
       />
 
       <FormFieldError error={error} />

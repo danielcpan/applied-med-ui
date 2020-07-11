@@ -25,20 +25,12 @@ const Input: React.FC<InputProps> = ({ name, form = {}, rules, ...restProps }) =
   return (
     <>
       <Controller
-        as={
-          <MuiTextField
-            variant="outlined"
-            type="text"
-            size="small"
-            margin="dense"
-            fullWidth
-            {...restProps}
-          />
-        }
+        as={<MuiTextField variant="outlined" type="text" size="small" margin="dense" fullWidth />}
         name={name}
         control={control}
         error={error}
         rules={rules}
+        {...restProps}
       />
 
       <FormFieldError error={error} />

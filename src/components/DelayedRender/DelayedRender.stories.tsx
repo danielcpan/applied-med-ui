@@ -3,7 +3,10 @@ import DelayedRender from './DelayedRender';
 
 export default {
   title: 'DelayedRender',
-  component: DelayedRender
+  component: DelayedRender,
+  parameters: {
+    componentSubtitle: 'useDelayRender hook as a wrapper component'
+  }
 };
 
 export const Default = () => (

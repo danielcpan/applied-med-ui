@@ -12,9 +12,14 @@ const StyledMuiBackdrop = withStyles(theme => ({
 }))(MuiBackdrop);
 
 interface ILoadingOverlay {
+  /** Delay in milliseconds */
   delay?: number;
 }
 
+/**
+ * Whole screen overlay loading indicator. Preconfigured center already
+ * adjusted for AppDrawer width
+ */
 const LoadingOverlay: React.FC<ILoadingOverlay> = ({ delay = 200, children, ...restProps }) => {
   const theme = useTheme();
 
@@ -22,7 +27,7 @@ const LoadingOverlay: React.FC<ILoadingOverlay> = ({ delay = 200, children, ...r
     <>
       <DelayedRender delay={delay}>
         <StyledMuiBackdrop open>
-          <CircularProgress style={{ marginLeft: theme.spacing(9) }} />
+          <CircularProgress style={{ marginLeft: theme.spacing(9) }} {...restProps} />
         </StyledMuiBackdrop>
       </DelayedRender>
       {flexRender(children, restProps)}
