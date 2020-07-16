@@ -7,7 +7,7 @@ import { lightTheme } from '../src/styles';
 const StylesDecorator = storyFn => (
   <StylesProvider injectFirst>
     <MuiThemeProvider theme={lightTheme}>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       {storyFn()}
     </MuiThemeProvider>
   </StylesProvider>
