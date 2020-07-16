@@ -14,7 +14,7 @@ interface IFormField {
 const FormField: React.FC<IFormField> = ({ label, description, isOptional, children }) => {
   return (
     <>
-      <Typography gutterBottom style={{ fontWeight: 600 }} component="div">
+      <Typography gutterBottom style={{ fontWeight: 500 }} component="div">
         {label}
         {isOptional && (
           <Typography
