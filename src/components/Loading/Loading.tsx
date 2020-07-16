@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Grid, CircularProgress, Typography } from '@material-ui/core';
 import { DelayedRender } from 'components';
 import { useInterval } from 'hooks';
+import { useTheme } from '@material-ui/core/styles';
 
 interface ILoading {
   /** Custom loading message available */
@@ -14,6 +15,7 @@ interface ILoading {
  * Loading indicator. Preconfigured with messages for long loads.
  */
 const Loading: React.FC<ILoading> = ({ message = '', delay = 200, children, ...restProps }) => {
+  const theme = useTheme();
   const [timer, setTimer] = useState(0);
   const [displayMessage, setDisplayMessage] = useState(message);
 
@@ -37,7 +39,8 @@ const Loading: React.FC<ILoading> = ({ message = '', delay = 200, children, ...r
         alignItems="center"
         style={{
           height: '100%',
-          textAlign: 'center'
+          textAlign: 'center',
+          padding: theme.spacing(1)
         }}
       >
         <Grid item>
