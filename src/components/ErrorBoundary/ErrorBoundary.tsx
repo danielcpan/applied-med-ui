@@ -19,18 +19,11 @@ class ErrorBoundary extends Component<IErrorBoundary> {
   }
 
   render() {
-    const { fallback = 'Error!' } = this.props;
+    const { error } = this.state;
+    const { fallback = 'Error!', children } = this.props;
 
-    if (this.state.error) {
-      return flexRender(fallback, { error: this.state.error });
-    }
-
-    return this.props.children;
+    return error ? flexRender(fallback, { error }) : children;
   }
 }
 
 export default ErrorBoundary;
-
-interface IWithErrorBoundary {
-  children: React.ReactNode;
-}

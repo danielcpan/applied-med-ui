@@ -23,6 +23,7 @@ export default {
 };
 
 const getAvatarInitials = name => {
+  // throw new Error('hey');
   return name
     .split(' ')
     .splice(0, 2)
@@ -80,7 +81,7 @@ export const Default = () => {
                   {users.data.map((el, idx) => (
                     <ListItem key={`${el.name}-${idx}`}>
                       <ListItemAvatar>
-                        <Avatar>{getAvatarInitials(el.name)}</Avatar>
+                        <Avatar>{getAvatarInitials(el.name.done)}</Avatar>
                       </ListItemAvatar>
                       <ListItemText primary={el.name} />
                     </ListItem>
