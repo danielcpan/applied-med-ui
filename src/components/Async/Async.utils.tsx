@@ -1,7 +1,5 @@
-import React from 'react';
 import { getIsLoading, getIsFetching, getHasError, getHasData } from 'utils/react-query.utils';
-import { ErrorBoundary } from 'components';
-import { isFunction, flexRender } from 'utils/general.utils';
+import { isFunction } from 'utils/general.utils';
 
 interface IGetHookVals {
   queries: any;

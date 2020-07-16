@@ -15,9 +15,9 @@ export { default as FormFieldError } from './FormFieldError/FormFieldError';
 
 export { default as Input } from './Input/Input';
 // export * from './Checkbox';
-// export * from './Radio';
-// export { default as Switch } from './Switch/Switch';
-// export { default as DatePicker } from './DatePicker/DatePicker';
+export * from './Radio';
+export { default as Switch } from './Switch/Switch';
+export { default as DatePicker } from './DatePicker/DatePicker';
 // export * from './Select';
 // export { default as MarkdownEditor } from './MarkdownEditor/MarkdownEditor';
 // export { default as Table } from './Table/Table';
