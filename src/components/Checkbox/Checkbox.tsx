@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { useFormContext, UseFormMethods } from 'react-hook-form';
 import {
   Typography,
@@ -22,19 +23,37 @@ interface ICheckBox {
   name: string;
   /** Optional if using FormContext */
   form?: UseFormMethods<any>;
+  /** Validations rules */
+  rules?: any;
   /** Checkbox specific label */
   label: string;
   /** Checkbox specific description */
   description?: string;
 }
 
-const Checkbox: React.FC<ICheckBox> = ({ name, form = {}, label, description, ...restProps }) => {
+const Checkbox: React.FC<ICheckBox> = ({
+  name,
+  form = {},
+  rules = {},
+  label,
+  description,
+  ...restProps
+}) => {
   const context = useFormContext() || {};
-  const { register } = { ...form, ...context };
+  const { register, errors } = { ...form, ...context };
+  const error = _.get(errors, name);
+  const hasRules = !!Object.keys(rules);
 
   return (
     <FormControlLabel
-      control={<MuiCheckbox inputRef={register} name={name} color="primary" {...restProps} />}
+      control={
+        <MuiCheckbox
+          inputRef={hasRules ? register(rules) : rules()}
+          name={name}
+          color="primary"
+          {...restProps}
+        />
+      }
       label={
         <>
           <Typography>{label}</Typography>

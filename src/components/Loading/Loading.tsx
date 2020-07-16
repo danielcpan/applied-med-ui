@@ -29,8 +29,6 @@ const Loading: React.FC<ILoading> = ({ message = '', delay = 200, children, ...r
     timer < 31 ? 1000 : null
   );
 
-  console.log('rendering');
-
   return (
     <DelayedRender delay={delay}>
       <Grid

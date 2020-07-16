@@ -1,7 +1,9 @@
-// export { default as Async } from './Async/Async';
+export { default as Async } from './Async/Async';
 export { default as Button } from './Button/Button';
 export * from './Loading';
-// export { default as ServerError } from './ServerError/ServerError';
+export { default as ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
+export * from './ErrorBoundary/ErrorBoundary';
+export { default as ServerError } from './ServerError/ServerError';
 export { default as DelayedRender } from './DelayedRender/DelayedRender';
 // export { default as AuthorizedRoute } from './AuthorizedRoute/AuthorizedRoute';
 // export { default as Wizard } from './Wizard';

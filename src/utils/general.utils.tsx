@@ -28,3 +28,7 @@ const isExoticComponent = (component: any) => {
     ['react.memo', 'react.forward_ref'].includes(component.$$typeof.description)
   );
 };
+
+export const isFunction = (fnToCheck: any) => {
+  return fnToCheck && {}.toString.call(fnToCheck) === '[object Function]';
+};

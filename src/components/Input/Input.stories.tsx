@@ -77,6 +77,7 @@ export const TextArea = () => {
           rowsMax={4}
         />
       </FormField>
+      <pre>{JSON.stringify({ values: { ...form.watch() }, ...form.formState }, null, 2)}</pre>
     </form>
   );
 };
