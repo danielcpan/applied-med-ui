@@ -1,9 +1,157 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { convertToRaw } from 'draft-js';
 import _ from 'lodash';
-import { useFormContext, Controller, UseFormMethods, ValidationRules } from 'react-hook-form';
+import { useFormContext, UseFormMethods, ValidationRules } from 'react-hook-form';
 import MuiRTE from 'mui-rte';
 import { FormFieldError } from 'components';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+// import MUIRichTextEditor from '../../';
+// import { TAutocompleteItem } from '../../src/components/Autocomplete';
+
+const Staff = (props: any) => {
+  return (
+    <>
+      <ListItemAvatar>
+        <Avatar
+          style={{
+            backgroundColor: props.color
+          }}
+        >
+          {props.name.substr(0, 1)}
+        </Avatar>
+      </ListItemAvatar>
+      <ListItemText primary={props.name} secondary={props.job} />
+    </>
+  );
+};
+
+const emojis = [
+  {
+    keys: ['face', 'grin'],
+    value: '😀',
+    content: '😀'
+  },
+  {
+    keys: ['face', 'beaming'],
+    value: '😁',
+    content: '😁'
+  },
+  {
+    keys: ['face', 'joy'],
+    value: '😂',
+    content: '😂'
+  },
+  {
+    keys: ['face', 'grin', 'big'],
+    value: '😃',
+    content: '😃'
+  },
+  {
+    keys: ['face', 'grin', 'smile'],
+    value: '😄',
+    content: '😄'
+  },
+  {
+    keys: ['face', 'sweat'],
+    value: '😅',
+    content: '😅'
+  }
+];
+
+const cities = [
+  {
+    keys: ['mexico'],
+    value: 'Mexico City',
+    content: 'Mexico City'
+  },
+  {
+    keys: ['mexico', 'beach'],
+    value: 'Cancun',
+    content: 'Cancun'
+  },
+  {
+    keys: ['japan', 'olympics'],
+    value: 'Tokyo',
+    content: 'Tokyo'
+  },
+  {
+    keys: ['japan'],
+    value: 'Osaka',
+    content: 'Osaka'
+  }
+];
+
+const staff = [
+  {
+    keys: ['all', 'foo', 'manager'],
+    value: 'Foo Bar',
+    content: <Staff name="Foo Bar" job="Manager" color="tomato" />
+  },
+  {
+    keys: ['all', 'bar', 'support'],
+    value: 'Bar Foo',
+    content: <Staff name="Bar Foo" job="Technical Support" color="orange" />
+  },
+  {
+    keys: ['all', 'mui', 'manager'],
+    value: 'Mui Rte',
+    content: <Staff name="Mui Rte" job="Manager" color="dodgerblue" />
+  }
+];
+
+const defaultTheme = createMuiTheme();
+
+Object.assign(defaultTheme, {
+  overrides: {
+    MUIRichTextEditor: {
+      // root: {
+      //   margin: '8px 0px 4px'
+      // },
+      container: {
+        border: '1px solid #c4c4c4',
+        borderRadius: 4,
+        margin: '8px 0px 4px'
+        // display: 'flex',
+        // flexDirection: 'column-reverse'
+      },
+      editorContainer: {
+        width: 'inherit',
+        // height: 110,
+        maxHeight: 110,
+        overflowY: 'auto',
+        padding: 0,
+        margin: '10.5px 14px'
+      },
+      editor: {
+        // height: 100,
+        // maxHeight: 100
+        // backgroundColor: '#ebebeb',
+        // padding: '20px',
+        // height: '100%',
+        // maxHeight: '200px',
+        // overflow: 'auto'
+      },
+      toolbar: {
+        // borderTop: '1px solid gray'
+        // backgroundColor: '#ebebeb'
+      },
+      placeHolder: {
+        // backgroundColor: '#ebebeb',
+        // paddingLeft: 20,
+        // width: 'inherit',
+        position: 'inherit'
+        // top: '20px'
+      }
+      // anchorLink: {
+      //   color: '#333333',
+      //   textDecoration: 'underline'
+      // }
+    }
+  }
+});
 
 interface IMarkdownEditor {
   /** Registered field name in useForm */
@@ -15,148 +163,67 @@ interface IMarkdownEditor {
   rules?: ValidationRules;
 }
 
+const isContentEmpty = (content: any) => {
+  return content.blocks.every((el: any) => el.text === '');
+};
+
 const MarkdownEditor: React.FC<IMarkdownEditor> = ({
   name,
   form = {},
   placeholder,
+  rules,
   ...restProps
 }) => {
   const context = useFormContext() || {};
-  const { control, errors } = { ...form, ...context };
+  const { register, errors, setValue, getValues } = { ...form, ...context };
   const error = _.get(errors, name);
-  // const register = form.register || formContext.register;
-  // const setValue = form.setValue || formContext.setValue;
-  // const getValue = form.getValue || formContext.getValues;
-  // const control = form.control || formContext.control;
 
-  console.log('error:', error);
-  // const [defaultValue, setDefaultValue] = React.useState('');
+  // console.log('error:', error);
 
-  // React.useEffect(() => {
-  //   register(name);
-  //   setDefaultValue(getValue(name));
-  // }, [register]);
+  useEffect(() => {
+    register({ name }, rules);
+  }, [register]);
 
   return (
     <>
-      <Controller
-        // as={MuiRTE}
-        name={name}
-        control={control}
-        label={placeholder}
-        // onChange={([value]: any) => {
-        //   const content = JSON.stringify(convertToRaw(value.getCurrentContent()));
-        //   console.log('content:', convertToRaw(value.getCurrentContent()));
-        //   if (convertToRaw(value.getCurrentContent()).blocks.every(el => el.text === '')) return '';
-        //   return content;
-        // }}
-        render={({ onChange, ...props }) => (
-          <MuiRTE
-            onChange={([value]: any) => {
-              console.log('value:', value);
-              const content = JSON.stringify(convertToRaw(value.getCurrentContent()));
-              console.log('content:', convertToRaw(value.getCurrentContent()));
-              if (convertToRaw(value.getCurrentContent()).blocks.every(el => el.text === ''))
-                return '';
-              return content;
-            }}
-          />
-        )}
-        {...restProps}
-      />
+      <MuiThemeProvider theme={defaultTheme}>
+        <MuiRTE
+          toolbarButtonSize="small"
+          controls={[]}
+          inlineToolbar
+          label={placeholder}
+          onChange={data => {
+            const content = convertToRaw(data.getCurrentContent());
+            const value = isContentEmpty(content) ? '' : JSON.stringify(content);
+
+            setValue(name, value, { shouldValidate: true });
+          }}
+          defaultValue={getValues()[name]}
+          // error={error}
+          autocomplete={{
+            strategies: [
+              {
+                items: emojis,
+                triggerChar: ':'
+              },
+              {
+                items: cities,
+                triggerChar: '/'
+              },
+              {
+                items: staff,
+                triggerChar: '@',
+                insertSpaceAfter: false
+              }
+            ]
+          }}
+          {...restProps}
+        />
+      </MuiThemeProvider>
 
       <FormFieldError error={error} />
     </>
   );
-
-  // return (
-  //   <MuiRTE
-  //     toolbarButtonSize="small"
-  //     inlineToolbar
-  //     ref={register({ required: true })}
-  //     label={restProps.placeholder}
-  //     defaultValue={defaultValue}
-  //     error={error}
-  //     onChange={value => {
-  //       const content = JSON.stringify(convertToRaw(value.getCurrentContent()));
-
-  //       setValue(name, content);
-  //     }}
-  //     {...restProps}
-  //   />
-  // );
-
-  // // const [state, setState] = React.useState('');
-
-  // // console.log('state:', state);
-
-  // // const description = watch('description');
-
-  // // console.log('description:', description);
-  // // console.log('getValues:', getValues());
-
-  // // const handleChange = ([editorState]) => {
-  // //   const contentState = editorState.getCurrentContent();
-  // //   // console.log('data:', editorState.getCurrentContent());
-  // //   // console.log('content state', convertToRaw(contentState));
-  // //   // console.log('data:', JSON.stringify(convertToRaw(contentState)));
-  // //   // contextSetValue && contextSetValue('description', JSON.stringify(convertToRaw(contentState)));
-  // //   // contextSetValue('description', 'hi');
-  // //   setValue && setValue('description2', 'test');
-  // //   // contextSetValue && contextSetValue('description2', 'value');
-  // // };
-
-  // // React.useEffect(() => {
-  // //   const description = getValues().description;
-  // //   contextSetValue('description._immutable', 'hi');
-  // //   // console.log(
-  // //   //   'description in markdown:',
-  // //   //   EditorState.createWithContent(convertFromRaw(JSON.parse(description)))
-  // //   // );
-  // // }, []);
-
-  // // const set = setValue || contextSetValue;
-
-  // // return (
-  // //   <MuiRTE
-  // //     // defaultValue={state}
-  // //     onChange={([editorState]) => {
-  // //       const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
-
-  // //       setValue && setValue('description', content);
-  // //       contextSetValue && contextSetValue('description', content);
-  // //     }}
-  // //   />
-  // // );
-
-  // return (
-  //   <>
-  //     <Controller
-  //       as={MuiRTE}
-  //       name={name}
-  //       onSave={data => {
-  //         console.log('data:', data);
-  //       }}
-  //       // onChange={_.debounce(handleChange, 1000)}
-  //       // onChange={handleChange}
-  //       onChange={([editorState]) => {
-  //         const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
-
-  //         setValue && setValue('description', content);
-  //         contextSetValue && contextSetValue('description', content);
-  //       }}
-  //       valueName="editorState"
-  //       control={control || contextControl}
-  //       // defaultValue={}
-  //       error={error}
-  //       inlineToolbar
-  //       label={restProps.placeholder}
-  //       {...restProps}
-  //     />
-
-  //     <FormFieldError error={error} />
-  //   </>
-  // );
 };
 
 export default MarkdownEditor;

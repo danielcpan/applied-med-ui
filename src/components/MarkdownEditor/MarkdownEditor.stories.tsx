@@ -23,7 +23,7 @@ export const Default = () => {
           form={form}
           name="name"
           rules={{
-            required: 'Required',
+            required: { value: true, message: 'Required' },
             maxLength: { value: 10, message: 'Exceeded max length!' },
             minLength: { value: 5, message: 'Too short!' }
           }}
