@@ -24,7 +24,7 @@
     "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-hook-form": "^6.0.2"
+    "react-hook-form": "^6.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
@@ -51,7 +51,7 @@
     "react": "^16.13.1",
     "react-docgen-typescript-loader": "^3.7.2",
     "react-dom": "^16.13.1",
-    "react-hook-form": "^6.0.3",
+    "react-hook-form": "^6.1.2",
     "react-is": "^16.13.1",
     "react-query": "^2.4.19",
     "rollup": "^2.18.2",

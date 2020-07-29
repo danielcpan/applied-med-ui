@@ -110,7 +110,7 @@ export const Default = () => {
   );
 };
 
-export const WithCustomComponents = () => {
+export const WithCustomStateComponents = () => {
   const form = useForm({ defaultValues: { name: '' } });
   const usersQuery = useQuery('users', mockFetchUsers({ success: true }));
   const [addUser, usersMutation] = useMutation(mockAddUser, {

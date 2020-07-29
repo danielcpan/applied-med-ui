@@ -1,157 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useReducer } from 'react';
 import { convertToRaw } from 'draft-js';
 import _ from 'lodash';
 import { useFormContext, UseFormMethods, ValidationRules } from 'react-hook-form';
 import MuiRTE from 'mui-rte';
 import { FormFieldError } from 'components';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-// import MUIRichTextEditor from '../../';
-// import { TAutocompleteItem } from '../../src/components/Autocomplete';
 
-const Staff = (props: any) => {
-  return (
-    <>
-      <ListItemAvatar>
-        <Avatar
-          style={{
-            backgroundColor: props.color
-          }}
-        >
-          {props.name.substr(0, 1)}
-        </Avatar>
-      </ListItemAvatar>
-      <ListItemText primary={props.name} secondary={props.job} />
-    </>
-  );
+const defaultStyles = {
+  container: {
+    border: '1px solid #c4c4c4',
+    borderRadius: 4,
+    margin: '8px 0px 4px'
+  },
+  editorContainer: {
+    width: 'inherit',
+    maxHeight: 110,
+    overflowY: 'auto',
+    padding: 0,
+    margin: '10.5px 14px'
+  },
+  placeHolder: {
+    position: 'inherit'
+  }
 };
 
-const emojis = [
-  {
-    keys: ['face', 'grin'],
-    value: '😀',
-    content: '😀'
-  },
-  {
-    keys: ['face', 'beaming'],
-    value: '😁',
-    content: '😁'
-  },
-  {
-    keys: ['face', 'joy'],
-    value: '😂',
-    content: '😂'
-  },
-  {
-    keys: ['face', 'grin', 'big'],
-    value: '😃',
-    content: '😃'
-  },
-  {
-    keys: ['face', 'grin', 'smile'],
-    value: '😄',
-    content: '😄'
-  },
-  {
-    keys: ['face', 'sweat'],
-    value: '😅',
-    content: '😅'
+const reducer = (state: any, action: any) => {
+  switch (action.type) {
+    case 'SET_DEFAULT_STYLE':
+      return defaultStyles;
+    case 'SET_ERROR_STYLE':
+      return { ...state, container: { ...state.container, border: '1px solid red' } };
+    default:
+      throw new Error();
   }
-];
+};
 
-const cities = [
-  {
-    keys: ['mexico'],
-    value: 'Mexico City',
-    content: 'Mexico City'
-  },
-  {
-    keys: ['mexico', 'beach'],
-    value: 'Cancun',
-    content: 'Cancun'
-  },
-  {
-    keys: ['japan', 'olympics'],
-    value: 'Tokyo',
-    content: 'Tokyo'
-  },
-  {
-    keys: ['japan'],
-    value: 'Osaka',
-    content: 'Osaka'
-  }
-];
-
-const staff = [
-  {
-    keys: ['all', 'foo', 'manager'],
-    value: 'Foo Bar',
-    content: <Staff name="Foo Bar" job="Manager" color="tomato" />
-  },
-  {
-    keys: ['all', 'bar', 'support'],
-    value: 'Bar Foo',
-    content: <Staff name="Bar Foo" job="Technical Support" color="orange" />
-  },
-  {
-    keys: ['all', 'mui', 'manager'],
-    value: 'Mui Rte',
-    content: <Staff name="Mui Rte" job="Manager" color="dodgerblue" />
-  }
-];
-
-const defaultTheme = createMuiTheme();
-
-Object.assign(defaultTheme, {
-  overrides: {
-    MUIRichTextEditor: {
-      // root: {
-      //   margin: '8px 0px 4px'
-      // },
-      container: {
-        border: '1px solid #c4c4c4',
-        borderRadius: 4,
-        margin: '8px 0px 4px'
-        // display: 'flex',
-        // flexDirection: 'column-reverse'
-      },
-      editorContainer: {
-        width: 'inherit',
-        // height: 110,
-        maxHeight: 110,
-        overflowY: 'auto',
-        padding: 0,
-        margin: '10.5px 14px'
-      },
-      editor: {
-        // height: 100,
-        // maxHeight: 100
-        // backgroundColor: '#ebebeb',
-        // padding: '20px',
-        // height: '100%',
-        // maxHeight: '200px',
-        // overflow: 'auto'
-      },
-      toolbar: {
-        // borderTop: '1px solid gray'
-        // backgroundColor: '#ebebeb'
-      },
-      placeHolder: {
-        // backgroundColor: '#ebebeb',
-        // paddingLeft: 20,
-        // width: 'inherit',
-        position: 'inherit'
-        // top: '20px'
-      }
-      // anchorLink: {
-      //   color: '#333333',
-      //   textDecoration: 'underline'
-      // }
-    }
-  }
-});
+const rowToHeight = (row: number) => row * 20 + 10;
 
 interface IMarkdownEditor {
   /** Registered field name in useForm */
@@ -161,10 +45,16 @@ interface IMarkdownEditor {
   form?: UseFormMethods<any>;
   /** Validations rules */
   rules?: ValidationRules;
+  rows?: number;
+  rowsMax?: number;
 }
 
-const isContentEmpty = (content: any) => {
+export const isContentEmpty = (content: any) => {
   return content.blocks.every((el: any) => el.text === '');
+};
+
+export const getContentLength = (content: any) => {
+  return content.blocks.reduce((acc: number, el: any) => (acc += el.text.length), 0);
 };
 
 const MarkdownEditor: React.FC<IMarkdownEditor> = ({
@@ -172,13 +62,34 @@ const MarkdownEditor: React.FC<IMarkdownEditor> = ({
   form = {},
   placeholder,
   rules,
+  rows = 5,
+  rowsMax = 5,
   ...restProps
 }) => {
+  const [styles, dispatch] = useReducer(reducer, defaultStyles);
   const context = useFormContext() || {};
-  const { register, errors, setValue, getValues } = { ...form, ...context };
+  const { register, errors, setValue, getValues, formState } = { ...form, ...context };
   const error = _.get(errors, name);
+  const defaultValue = useMemo(() => getValues(name), [name]);
 
-  // console.log('error:', error);
+  const theme = useMemo(() => {
+    return Object.assign(createMuiTheme(), {
+      overrides: {
+        MUIRichTextEditor: {
+          ...styles,
+          editorContainer: {
+            ...styles.editorContainer,
+            height: rowToHeight(rows),
+            maxHeight: rowToHeight(rowsMax)
+          }
+        }
+      }
+    });
+  }, [styles]);
+
+  useEffect(() => {
+    dispatch({ type: !!error ? 'SET_ERROR_STYLE' : 'SET_DEFAULT_STYLE' });
+  }, [error]);
 
   useEffect(() => {
     register({ name }, rules);
@@ -186,7 +97,7 @@ const MarkdownEditor: React.FC<IMarkdownEditor> = ({
 
   return (
     <>
-      <MuiThemeProvider theme={defaultTheme}>
+      <MuiThemeProvider theme={theme}>
         <MuiRTE
           toolbarButtonSize="small"
           controls={[]}
@@ -196,27 +107,12 @@ const MarkdownEditor: React.FC<IMarkdownEditor> = ({
             const content = convertToRaw(data.getCurrentContent());
             const value = isContentEmpty(content) ? '' : JSON.stringify(content);
 
-            setValue(name, value, { shouldValidate: true });
+            setValue(name, value, {
+              shouldDirty: true,
+              shouldValidate: formState.dirtyFields.name
+            });
           }}
-          defaultValue={getValues()[name]}
-          // error={error}
-          autocomplete={{
-            strategies: [
-              {
-                items: emojis,
-                triggerChar: ':'
-              },
-              {
-                items: cities,
-                triggerChar: '/'
-              },
-              {
-                items: staff,
-                triggerChar: '@',
-                insertSpaceAfter: false
-              }
-            ]
-          }}
+          defaultValue={defaultValue}
           {...restProps}
         />
       </MuiThemeProvider>
