@@ -32,3 +32,11 @@ const isExoticComponent = (component: any) => {
 export const isFunction = (fnToCheck: any) => {
   return fnToCheck && {}.toString.call(fnToCheck) === '[object Function]';
 };
+
+export const mapOptions = (data: any) =>
+  data.map((el: any) => ({
+    value: el.id,
+    name: el.name,
+    label: el.displayValue,
+    description: el.description
+  }));

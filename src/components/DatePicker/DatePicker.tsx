@@ -19,8 +19,7 @@ type DatePickerProps = {
  * and `material-ui/pickers/KeyboardDatePicker` as base component
  */
 const DatePicker: React.FC<DatePickerProps> = ({ name, form = {}, rules, ...restProps }) => {
-  const context = useFormContext() || {};
-  const { control, errors } = { ...form, ...context };
+  const { control, errors } = useFormContext() || form;
   const error = _.get(errors, name);
 
   return (

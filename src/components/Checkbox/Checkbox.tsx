@@ -39,8 +39,7 @@ const Checkbox: React.FC<ICheckBox> = ({
   description,
   ...restProps
 }) => {
-  const context = useFormContext() || {};
-  const { register, errors } = { ...form, ...context };
+  const { register, errors } = useFormContext() || form;
   const error = _.get(errors, name);
   const hasRules = !!Object.keys(rules);
 

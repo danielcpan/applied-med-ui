@@ -67,8 +67,7 @@ const MarkdownEditor: React.FC<IMarkdownEditor> = ({
   ...restProps
 }) => {
   const [styles, dispatch] = useReducer(reducer, defaultStyles);
-  const context = useFormContext() || {};
-  const { register, errors, setValue, getValues, formState } = { ...form, ...context };
+  const { register, errors, setValue, getValues, formState } = useFormContext() || form;
   const error = _.get(errors, name);
   const defaultValue = useMemo(() => getValues(name), [name]);
 

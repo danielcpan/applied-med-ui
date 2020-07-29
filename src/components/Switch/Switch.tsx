@@ -1,5 +1,5 @@
 import React from 'react';
-import { Controller, useFormContext, UseFormMethods } from 'react-hook-form';
+import { useFormContext, UseFormMethods } from 'react-hook-form';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography, Switch as MuiSwitch, Grid } from '@material-ui/core';
 
@@ -58,8 +58,7 @@ const Switch: React.FC<ISwitch> = ({
   form = {},
   ...restProps
 }) => {
-  const context = useFormContext() || {};
-  const { register } = { ...form, ...context };
+  const { register } = useFormContext() || form;
 
   return (
     <Typography component="div">

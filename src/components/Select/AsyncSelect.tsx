@@ -1,34 +1,40 @@
 import React from 'react';
 import _ from 'lodash';
 import { Controller, useFormContext, UseFormMethods, ValidationRules } from 'react-hook-form';
-import { TextField as MuiTextField } from '@material-ui/core';
+import ReactSelectAsync from 'react-select/async';
 import { FormFieldError } from 'components';
 
-type InputProps = {
+interface IAsyncSelect {
   /** Registered field name in useForm */
   name: string;
+  loadOptions: (input: any, callback: any) => void;
   /** Optional if using FormContext */
   form?: UseFormMethods<any>;
   /** Validations rules */
   rules?: ValidationRules;
-};
+}
 
-/**
- * Uses `react-hook-form` for form data management
- * and `material-ui/core/TextField` as base component
- */
-const Input: React.FC<InputProps> = ({ name, form = {}, rules, ...restProps }) => {
+const AsyncSelect: React.FC<IAsyncSelect> = ({ name, loadOptions, form = {}, ...restProps }) => {
   const { control, errors } = useFormContext() || form;
   const error = _.get(errors, name);
 
   return (
     <>
       <Controller
-        as={<MuiTextField variant="outlined" type="text" size="small" margin="dense" fullWidth />}
+        as={ReactSelectAsync}
         name={name}
         control={control}
+        onChange={([selected]: any) => selected}
+        isClearable
+        cacheOptions
+        loadOptions={loadOptions}
         error={error}
-        rules={rules}
+        styles={{
+          control: (provided: any) => ({
+            ...provided,
+            border: error && '1px solid red'
+          })
+        }}
         {...restProps}
       />
 
@@ -37,4 +43,4 @@ const Input: React.FC<InputProps> = ({ name, form = {}, rules, ...restProps }) =
   );
 };
 
-export default Input;
+export default AsyncSelect;

@@ -10,11 +10,7 @@ export default {
 };
 
 export const Default = () => {
-  const form = useForm({
-    defaultValues: {
-      name: ''
-    }
-  });
+  const form = useForm({ defaultValues: { name: '' } });
 
   return (
     <form

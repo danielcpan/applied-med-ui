@@ -10,8 +10,7 @@ interface IRadioGroupField {
 }
 
 const RadioGroup: React.FC<IRadioGroupField> = ({ name, form = {}, children, ...restProps }) => {
-  const context = useFormContext() || {};
-  const { control } = { ...form, ...context };
+  const { control } = useFormContext() || form;
 
   return (
     <Controller
