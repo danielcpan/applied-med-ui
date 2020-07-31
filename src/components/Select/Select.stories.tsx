@@ -52,9 +52,9 @@ export const WithFormContext = () => {
         <FormField label="Name" description="I'm a description">
           <Select name="name" options={options} rules={{ required: 'Required' }} />
         </FormField>
+        <button type="submit">Submit</button>
       </form>
       <pre>{JSON.stringify({ values: { ...form.watch() }, ...form.formState }, null, 2)}</pre>
-      <button type="submit">Submit</button>
     </FormProvider>
   );
 };
@@ -93,6 +93,7 @@ export const AsyncSelect = () => {
         />
       </FormField>
       <pre>{JSON.stringify({ values: { ...form.watch() }, ...form.formState }, null, 2)}</pre>
+      <button type="submit">Submit</button>
     </form>
   );
 };

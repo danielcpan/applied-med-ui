@@ -40,7 +40,6 @@ const Radio: React.FC<IRadio> = ({ value, label, description }) => (
         )}
       </>
     }
-    // style={{ marginLeft: 0, alignItems: 'flex-start' }}
   />
 );
 

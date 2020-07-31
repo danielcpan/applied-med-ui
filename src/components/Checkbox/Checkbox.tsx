@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { useFormContext, UseFormMethods } from 'react-hook-form';
 import {
   Typography,
@@ -39,8 +38,7 @@ const Checkbox: React.FC<ICheckBox> = ({
   description,
   ...restProps
 }) => {
-  const { register, errors } = useFormContext() || form;
-  const error = _.get(errors, name);
+  const { register } = useFormContext() || form;
   const hasRules = !!Object.keys(rules);
 
   return (

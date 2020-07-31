@@ -10,5 +10,5 @@ export default {
 };
 
 export const Default = () => (
-  <DelayedRender delay={1000}>There's a delay before I get rendered!</DelayedRender>
+  <DelayedRender delay={1000}>{`There's a delay before I get rendered!`}</DelayedRender>
 );

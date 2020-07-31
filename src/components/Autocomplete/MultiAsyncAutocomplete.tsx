@@ -1,9 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
+import { useQuery, useMutation } from 'react-query';
 import { Controller, useFormContext, UseFormMethods, ValidationRules } from 'react-hook-form';
-import { Checkbox } from '@material-ui/core';
+import { Checkbox, CircularProgress } from '@material-ui/core';
 import { FormFieldError } from 'components';
 import AutocompleteBase from './AutocompleteBase';
+import { InputBase } from '../Input';
 import {
   CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
   CheckBox as CheckBoxIcon
@@ -15,7 +17,8 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 type TAutocomplete = {
   /** Registered field name in useForm */
   name: string;
-  options: [];
+  loadOptions: (input: string) => Promise<any>;
+  defaultOptions?: any;
   /** Optional if using FormContext */
   form?: UseFormMethods<any>;
   /** Validations rules */
@@ -28,20 +31,33 @@ type TAutocomplete = {
  */
 const MultiAutocomplete: React.FC<TAutocomplete> = ({
   name,
-  options,
+  loadOptions: mutationFn,
+  defaultOptions = [],
   form = {},
   rules,
   ...restProps
 }) => {
   const { control, errors } = useFormContext() || form;
   const error = _.get(errors, name);
+  console.log('multi async errors:', errors);
+
+  // const { isLoading, isError, data, refetch } = useQuery(
+  //   `async-autocomplete-${name}`,
+  //   loadOptions,
+  //   {
+  //     queryFnParamsFilter: args => args.slice(1)
+  //   }
+  // );
+  // // console.log('asyncData:', data);
+
+  // Normally should useQuery but in this instance, useMutation was just easier.
+  const [loadOptions, options] = useMutation(mutationFn);
 
   return (
     <>
       <Controller
         render={({ onChange, ...props }) => (
           <AutocompleteBase
-            options={options}
             renderOption={(option: any, { selected }: any) => (
               <>
                 <Checkbox
@@ -53,10 +69,34 @@ const MultiAutocomplete: React.FC<TAutocomplete> = ({
                 {option.label}
               </>
             )}
+            renderInput={(params: any) => (
+              <InputBase
+                {...params}
+                error={options.isError}
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {options.isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  )
+                }}
+              />
+            )}
+            options={options.data || defaultOptions}
+            loading={options.isLoading}
             onChange={(e: any, data: any) => onChange(data)}
+            onInputChange={_.debounce((event, newInputValue) => {
+              loadOptions(newInputValue);
+            }, 1000)}
             multiple
             disableCloseOnSelect
             filterSelectedOptions
+            noOptionsText={
+              options.isError ? 'Opps! Something went wrong. Please try again later.' : 'No Options'
+            }
+            rules={rules}
             {...props}
             {...restProps}
           />
@@ -64,7 +104,6 @@ const MultiAutocomplete: React.FC<TAutocomplete> = ({
         onChange={([, data]: any) => data}
         control={control}
         name={name}
-        rules={rules}
       />
 
       <FormFieldError error={error} />

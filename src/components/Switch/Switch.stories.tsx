@@ -45,3 +45,5 @@ export const WithFormContext = () => {
     </FormProvider>
   );
 };
+
+export const BaseComponent = () => <SwitchBase />;

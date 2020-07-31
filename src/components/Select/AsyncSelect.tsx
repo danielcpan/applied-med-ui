@@ -21,20 +21,23 @@ const AsyncSelect: React.FC<IAsyncSelect> = ({ name, loadOptions, form = {}, ...
   return (
     <>
       <Controller
-        as={ReactSelectAsync}
+        as={
+          <ReactSelectAsync
+            isClearable
+            cacheOptions
+            loadOptions={loadOptions}
+            styles={{
+              control: (provided: any) => ({
+                ...provided,
+                border: error && '1px solid red'
+              })
+            }}
+          />
+        }
         name={name}
         control={control}
         onChange={([selected]: any) => selected}
-        isClearable
-        cacheOptions
-        loadOptions={loadOptions}
         error={error}
-        styles={{
-          control: (provided: any) => ({
-            ...provided,
-            border: error && '1px solid red'
-          })
-        }}
         {...restProps}
       />
 

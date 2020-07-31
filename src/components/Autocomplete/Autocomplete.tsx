@@ -1,11 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import { Controller, useFormContext, UseFormMethods, ValidationRules } from 'react-hook-form';
-import { TextField } from '@material-ui/core';
 import { FormFieldError } from 'components';
-import { MyAutocomplete } from './Autocomplete.utils';
+import AutocompleteBase from './AutocompleteBase';
 
-type TAutocompleteInput = {
+type TAutocomplete = {
   /** Registered field name in useForm */
   name: string;
   options: [];
@@ -15,10 +14,15 @@ type TAutocompleteInput = {
   rules?: ValidationRules;
 };
 
-const AutocompleteInput: React.FC<TAutocompleteInput> = ({
+/**
+ * Uses `react-hook-form` for form data management
+ * and `material-ui/lab/Autocomplete` as base component
+ */
+const Autocomplete: React.FC<TAutocomplete> = ({
   name,
   options,
   form = {},
+  rules,
   ...restProps
 }) => {
   const { control, errors } = useFormContext() || form;
@@ -28,7 +32,7 @@ const AutocompleteInput: React.FC<TAutocompleteInput> = ({
     <>
       <Controller
         render={({ onChange, ...props }) => (
-          <MyAutocomplete
+          <AutocompleteBase
             options={options}
             onChange={(e: any, data: any) => onChange(data)}
             {...restProps}
@@ -38,6 +42,7 @@ const AutocompleteInput: React.FC<TAutocompleteInput> = ({
         onChange={([, data]: any) => data}
         control={control}
         name={name}
+        rules={rules}
       />
 
       <FormFieldError error={error} />
@@ -45,4 +50,4 @@ const AutocompleteInput: React.FC<TAutocompleteInput> = ({
   );
 };
 
-export default AutocompleteInput;
+export default Autocomplete;

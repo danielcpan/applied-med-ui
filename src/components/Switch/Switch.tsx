@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext, UseFormMethods } from 'react-hook-form';
 import SwitchBase from './SwitchBase';
-import { Typography, Switch as MuiSwitch, Grid } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 
 type TSwitch = {
   /** Registered field name in useForm */

@@ -14,11 +14,12 @@ export { default as FormField } from './FormField/FormField';
 export { default as FormFieldError } from './FormFieldError/FormFieldError';
 
 export * from './Input';
-// export * from './Checkbox';
+export * from './Checkbox';
 export * from './Radio';
-export { default as Switch } from './Switch/Switch';
+export * from './Switch';
 export { default as DatePicker } from './DatePicker/DatePicker';
-// export * from './Select';
+export * from './Select';
+export * from './Autocomplete';
 export { default as MarkdownEditor } from './MarkdownEditor/MarkdownEditor';
 // export { default as Table } from './Table/Table';
 

@@ -81,7 +81,7 @@ const StyledAutocomplete = withStyles({
   }
 })(MuiAutocomplete);
 
-export const MyAutocomplete = (props: any) => (
+const AutocompleteBase = (props: any) => (
   <StyledAutocomplete
     size="small"
     clearOnEscape
@@ -93,3 +93,5 @@ export const MyAutocomplete = (props: any) => (
     {...props}
   />
 );
+
+export default AutocompleteBase;

@@ -1,2 +1,2 @@
-export { default as TextField } from './Input';
-export { default as TextFieldBase } from './InputBase';
+export { default as Input } from './Input';
+export { default as InputBase } from './InputBase';
