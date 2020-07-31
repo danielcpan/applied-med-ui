@@ -13,7 +13,7 @@ export { default as DelayedRender } from './DelayedRender/DelayedRender';
 export { default as FormField } from './FormField/FormField';
 export { default as FormFieldError } from './FormFieldError/FormFieldError';
 
-export { default as Input } from './Input/Input';
+export * from './Input';
 // export * from './Checkbox';
 export * from './Radio';
 export { default as Switch } from './Switch/Switch';

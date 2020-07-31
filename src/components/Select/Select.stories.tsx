@@ -11,7 +11,7 @@ export default {
   component: Select,
   subcomponents: { FormField, FormFieldError },
   parameters: {
-    componentSubtitle: 'Select Component Based on react-select'
+    componentSubtitle: 'Select component based on react-select'
   }
 };
 
@@ -50,7 +50,7 @@ export const WithFormContext = () => {
         })}
       >
         <FormField label="Name" description="I'm a description">
-          <Select form={form} name="name" options={options} rules={{ required: 'Required' }} />
+          <Select name="name" options={options} rules={{ required: 'Required' }} />
         </FormField>
       </form>
       <pre>{JSON.stringify({ values: { ...form.watch() }, ...form.formState }, null, 2)}</pre>

@@ -1,35 +1,43 @@
 import React from 'react';
 import _ from 'lodash';
 import { Controller, useFormContext, UseFormMethods, ValidationRules } from 'react-hook-form';
+import { TextField } from '@material-ui/core';
 import { FormFieldError } from 'components';
-import InputBase from './InputBase';
+import { MyAutocomplete } from './Autocomplete.utils';
 
-type TInput = {
+type TAutocompleteInput = {
   /** Registered field name in useForm */
   name: string;
+  options: [];
   /** Optional if using FormContext */
   form?: UseFormMethods<any>;
   /** Validations rules */
   rules?: ValidationRules;
 };
 
-/**
- * Uses `react-hook-form` for form data management
- * and `material-ui/core/TextField` as base component
- */
-const Input: React.FC<TInput> = ({ name, form = {}, rules, ...restProps }) => {
+const AutocompleteInput: React.FC<TAutocompleteInput> = ({
+  name,
+  options,
+  form = {},
+  ...restProps
+}) => {
   const { control, errors } = useFormContext() || form;
   const error = _.get(errors, name);
 
   return (
     <>
       <Controller
-        as={InputBase}
-        name={name}
+        render={({ onChange, ...props }) => (
+          <MyAutocomplete
+            options={options}
+            onChange={(e: any, data: any) => onChange(data)}
+            {...restProps}
+            {...props}
+          />
+        )}
+        onChange={([, data]: any) => data}
         control={control}
-        error={error}
-        rules={rules}
-        {...restProps}
+        name={name}
       />
 
       <FormFieldError error={error} />
@@ -37,4 +45,4 @@ const Input: React.FC<TInput> = ({ name, form = {}, rules, ...restProps }) => {
   );
 };
 
-export default Input;
+export default AutocompleteInput;

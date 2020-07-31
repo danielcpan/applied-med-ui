@@ -1,15 +1,13 @@
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FormField, FormFieldError } from 'components';
+import InputBase from './InputBase';
 import Input from './Input';
 
 export default {
   title: 'FormFields/Input',
   component: Input,
-  subcomponents: { FormField, FormFieldError },
-  parameters: {
-    componentSubtitle: 'Generic Text Input Component'
-  }
+  subcomponents: { Input, InputBase, FormField, FormFieldError }
 };
 
 export const Default = () => {
@@ -80,4 +78,8 @@ export const TextArea = () => {
       <pre>{JSON.stringify({ values: { ...form.watch() }, ...form.formState }, null, 2)}</pre>
     </form>
   );
+};
+
+export const BaseComponent = () => {
+  return <InputBase />;
 };

@@ -2,14 +2,12 @@ import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FormField, FormFieldError } from 'components';
 import Switch from './Switch';
+import SwitchBase from './SwitchBase';
 
 export default {
   title: 'FormFields/Switch',
   component: Switch,
-  subcomponents: { FormField, FormFieldError },
-  parameters: {
-    componentSubtitle: 'Generic Boolean Input Component'
-  }
+  subcomponents: { SwitchBase, FormField, FormFieldError }
 };
 
 export const Default = () => {

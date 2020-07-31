@@ -21,15 +21,18 @@
   "peerDependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-hook-form": "^6.1.2"
+    "react-hook-form": "^6.1.2",
+    "react-window": "^1.8.5"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
@@ -40,6 +43,7 @@
     "@types/lodash": "^4.14.157",
     "@types/react": "^16.9.41",
     "@types/react-select": "^3.0.14",
+    "@types/react-window": "^1.8.2",
     "@typescript-eslint/eslint-plugin": "^3.5.0",
     "@typescript-eslint/parser": "^3.5.0",
     "babel-loader": "^8.1.0",
@@ -55,6 +59,7 @@
     "react-hook-form": "^6.1.2",
     "react-is": "^16.13.1",
     "react-query": "^2.4.19",
+    "react-window": "^1.8.5",
     "rollup": "^2.18.2",
     "rollup-plugin-peer-deps-external": "^2.2.3",
     "rollup-plugin-terser": "^6.1.0",
