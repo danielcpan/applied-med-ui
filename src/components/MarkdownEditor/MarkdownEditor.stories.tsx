@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FormField, FormFieldError } from 'components';
 import MarkdownEditor, { getContentLength } from './MarkdownEditor';
+import MuiRTE from 'mui-rte';
 
 export default {
   title: 'FormFields/MarkdownEditor',
@@ -70,4 +71,8 @@ export const WithFormContext = () => {
       <button type="submit">Submit</button>
     </FormProvider>
   );
+};
+
+export const OriginalToBeRemovedLater = () => {
+  return <MuiRTE />;
 };
