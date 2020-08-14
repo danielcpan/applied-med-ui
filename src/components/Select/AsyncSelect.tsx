@@ -14,9 +14,9 @@ interface IAsyncSelect {
   rules?: ValidationRules;
 }
 
-const AsyncSelect: React.FC<IAsyncSelect> = ({ name, loadOptions, form = {}, ...restProps }) => {
-  const { control, errors } = useFormContext() || form;
-  const error = _.get(errors, name);
+const AsyncSelect: React.FC<IAsyncSelect> = ({ name, loadOptions, form, ...restProps }) => {
+  const { control, errors } = form || useFormContext();
+  const error = errors?.[name];
 
   return (
     <>

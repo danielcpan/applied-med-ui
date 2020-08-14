@@ -58,9 +58,9 @@ interface ISelect {
   rules?: ValidationRules;
 }
 
-const Select: React.FC<ISelect> = ({ name, options, form = {}, ...restProps }) => {
-  const { control, errors } = useFormContext() || form;
-  const error = _.get(errors, name);
+const Select: React.FC<ISelect> = ({ name, options, form, ...restProps }) => {
+  const { control, errors } = form || useFormContext();
+  const error = errors?.[name];
 
   return (
     <>

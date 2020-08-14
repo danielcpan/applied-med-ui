@@ -32,13 +32,13 @@ interface ICheckBox {
 
 const Checkbox: React.FC<ICheckBox> = ({
   name,
-  form = {},
+  form,
   rules = {},
   label,
   description,
   ...restProps
 }) => {
-  const { register } = useFormContext() || form;
+  const { register } = form || useFormContext();
   const hasRules = !!Object.keys(rules);
 
   return (

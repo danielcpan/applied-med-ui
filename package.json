@@ -13,7 +13,8 @@
     "watch": "rollup -cw",
     "lint": "eslint  --fix src --ext .js,.jsx,.ts,.tsx",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepublishOnly": "yarn build"
   },
   "repository": "https://github.com/danielcpan/applied-med-ui.git",
   "author": "Daniel Pan <danielcpan.dev@gmail.com>",
@@ -25,8 +26,8 @@
     "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-window": "^1.8.5",
-    "react-hook-form": "^6.3.2"
+    "react-hook-form": "^6.3.2",
+    "react-window": "^1.8.5"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
@@ -42,6 +43,7 @@
     "@storybook/react": "^5.3.19",
     "@types/lodash": "^4.14.157",
     "@types/react": "^16.9.41",
+    "@types/react-query": "^1.1.2",
     "@types/react-select": "^3.0.14",
     "@types/react-window": "^1.8.2",
     "@typescript-eslint/eslint-plugin": "^3.5.0",
@@ -73,6 +75,7 @@
     "@material-ui/pickers": "^3.2.10",
     "date-fns": "^2.14.0",
     "draft-js": "^0.11.6",
+    "idb-keyval": "^3.2.0",
     "mui-rte": "^1.23.1",
     "react-select": "^3.1.0"
   }

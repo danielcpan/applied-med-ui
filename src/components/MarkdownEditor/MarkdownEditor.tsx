@@ -59,7 +59,7 @@ export const getContentLength = (content: any) => {
 
 const MarkdownEditor: React.FC<IMarkdownEditor> = ({
   name,
-  form = {},
+  form,
   placeholder,
   rules,
   rows = 5,
@@ -67,8 +67,8 @@ const MarkdownEditor: React.FC<IMarkdownEditor> = ({
   ...restProps
 }) => {
   const [styles, dispatch] = useReducer(reducer, defaultStyles);
-  const { register, errors, setValue, getValues, formState } = useFormContext() || form;
-  const error = _.get(errors, name);
+  const { register, errors, setValue, getValues, formState } = form || useFormContext();
+  const error = errors?.[name];
   const defaultValue = useMemo(() => getValues(name), [name]);
 
   const theme = useMemo(() => {

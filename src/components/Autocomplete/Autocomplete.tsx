@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { Controller, useFormContext, UseFormMethods, ValidationRules } from 'react-hook-form';
 import { FormFieldError } from 'components';
 import AutocompleteBase from './AutocompleteBase';
@@ -18,15 +17,9 @@ type TAutocomplete = {
  * Uses `react-hook-form` for form data management
  * and `material-ui/lab/Autocomplete` as base component
  */
-const Autocomplete: React.FC<TAutocomplete> = ({
-  name,
-  options,
-  form = {},
-  rules,
-  ...restProps
-}) => {
-  const { control, errors } = useFormContext() || form;
-  const error = _.get(errors, name);
+const Autocomplete: React.FC<TAutocomplete> = ({ name, options, form, rules, ...restProps }) => {
+  const { control, errors } = form || useFormContext();
+  const error = errors?.[name];
 
   return (
     <>

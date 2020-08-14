@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { Controller, useFormContext, UseFormMethods, ValidationRules } from 'react-hook-form';
 import { FormFieldError } from 'components';
 import InputBase from './InputBase';
@@ -17,9 +16,9 @@ type TInput = {
  * Uses `react-hook-form` for form data management
  * and `material-ui/core/TextField` as base component
  */
-const Input: React.FC<TInput> = ({ name, form = {}, rules, ...restProps }) => {
-  const { control, errors } = useFormContext() || form;
-  const error = _.get(errors, name);
+const Input: React.FC<TInput> = ({ name, form, rules, ...restProps }) => {
+  const { control, errors } = form || useFormContext();
+  const error = errors?.[name];
 
   return (
     <>

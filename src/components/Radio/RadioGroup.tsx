@@ -9,8 +9,8 @@ interface IRadioGroupField {
   form?: UseFormMethods<any>;
 }
 
-const RadioGroup: React.FC<IRadioGroupField> = ({ name, form = {}, children, ...restProps }) => {
-  const { control } = useFormContext() || form;
+const RadioGroup: React.FC<IRadioGroupField> = ({ name, form, children, ...restProps }) => {
+  const { control } = form || useFormContext();
 
   return (
     <Controller

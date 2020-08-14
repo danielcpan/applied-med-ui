@@ -6,11 +6,11 @@
 // import { FormFieldError, FieldProps } from 'components';
 // import { getFormGroupValues } from 'utils/react-hook-form.utils';
 
-// const CheckboxGroup: React.FC<FieldProps> = ({ name, form = {}, rules, children }) => {
+// const CheckboxGroup: React.FC<FieldProps> = ({ name, form, rules, children }) => {
 //   const theme = useTheme();
 //   const context = useFormContext() || {};
 //   const { errors, control, watch, trigger } = { ...form, ...context };
-//   const error = _.get(errors, name);
+//   const error = errors?.[name];
 //   const newErr = Object.keys(error || {})?.[0] || undefined;
 
 //   console.log('errors:', error);

@@ -83,6 +83,7 @@ const StyledAutocomplete = withStyles({
 
 const AutocompleteBase = (props: any) => (
   <StyledAutocomplete
+    fullWidth
     size="small"
     clearOnEscape
     getOptionLabel={({ label }) => label}

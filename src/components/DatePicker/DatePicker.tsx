@@ -18,9 +18,9 @@ type DatePickerProps = {
  * Uses `react-hook-form` for form data management
  * and `material-ui/pickers/KeyboardDatePicker` as base component
  */
-const DatePicker: React.FC<DatePickerProps> = ({ name, form = {}, rules, ...restProps }) => {
-  const { control, errors } = useFormContext() || form;
-  const error = _.get(errors, name);
+const DatePicker: React.FC<DatePickerProps> = ({ name, form, rules, ...restProps }) => {
+  const { control, errors } = form || useFormContext();
+  const error = errors?.[name];
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

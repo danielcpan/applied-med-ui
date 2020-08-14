@@ -29,12 +29,12 @@ type TAutocomplete = {
 const MultiAutocomplete: React.FC<TAutocomplete> = ({
   name,
   options,
-  form = {},
+  form,
   rules,
   ...restProps
 }) => {
-  const { control, errors } = useFormContext() || form;
-  const error = _.get(errors, name);
+  const { control, errors } = form || useFormContext();
+  const error = errors?.[name];
 
   return (
     <>

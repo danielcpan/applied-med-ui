@@ -20,10 +20,10 @@ const Switch: React.FC<TSwitch> = ({
   name,
   offLabel = 'No',
   onLabel = 'Yes',
-  form = {},
+  form,
   ...restProps
 }) => {
-  const { register } = useFormContext() || form;
+  const { register } = form || useFormContext();
 
   return (
     <Typography component="div">
