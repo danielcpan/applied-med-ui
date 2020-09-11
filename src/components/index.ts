@@ -19,7 +19,7 @@ export * from './Radio';
 export * from './Switch';
 export { default as DatePicker } from './DatePicker/DatePicker';
 export * from './Select';
-export * from './Autocomplete';
+// export * from './Autocomplete';
 export { default as MarkdownEditor } from './MarkdownEditor/MarkdownEditor';
 // export { default as Table } from './Table/Table';
 
