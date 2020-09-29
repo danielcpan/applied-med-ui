@@ -11,7 +11,7 @@ import {
   getComponentIsFetching,
   getComponentHasError,
   getComponentHasData
-} from './Async.utils';
+} from './Async.helpers';
 import { getErrors } from 'utils/react-query.utils';
 import { flexRender } from 'utils/general.utils';
 
