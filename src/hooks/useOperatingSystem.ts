@@ -1,6 +1,18 @@
 import { useMemo } from 'react';
 
-const useOperatingSystem = (): string => {
+export type TOperatingSystem =
+  | 'Windows 10'
+  | 'Windows 8'
+  | 'Windows 7'
+  | 'Windows Vista'
+  | 'Windows XP'
+  | 'Windows 2000'
+  | 'Mac/iOS'
+  | 'Unix'
+  | 'Linux'
+  | 'Unknown';
+
+const useOperatingSystem = (): TOperatingSystem => {
   return useMemo(() => {
     const { userAgent } = window.navigator;
 
@@ -11,7 +23,7 @@ const useOperatingSystem = (): string => {
     if (userAgent.indexOf('Windows NT 5.1') != -1) return 'Windows XP';
     if (userAgent.indexOf('Windows NT 5.0') != -1) return 'Windows 2000';
     if (userAgent.indexOf('Mac') != -1) return 'Mac/iOS';
-    if (userAgent.indexOf('X11') != -1) return 'UNIX';
+    if (userAgent.indexOf('X11') != -1) return 'Unix';
     if (userAgent.indexOf('Linux') != -1) return 'Linux';
     return 'Unknown';
   }, [window.navigator.userAgent]);
