@@ -4,7 +4,7 @@ import { DelayedRender } from 'components';
 import { useInterval } from 'hooks';
 import { useTheme } from '@material-ui/core/styles';
 
-interface ILoading {
+type TLoading = {
   /** Custom loading message available */
   message?: string;
   /** Delay in milliseconds */
@@ -14,7 +14,7 @@ interface ILoading {
 /**
  * Loading indicator. Preconfigured with messages for long loads.
  */
-const Loading: React.FC<ILoading> = ({ message = '', delay = 200, children, ...restProps }) => {
+const Loading: React.FC<TLoading> = ({ message = '', delay = 200, children, ...restProps }) => {
   const theme = useTheme();
   const [timer, setTimer] = useState(0);
   const [displayMessage, setDisplayMessage] = useState(message);

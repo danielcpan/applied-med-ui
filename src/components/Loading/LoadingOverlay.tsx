@@ -11,7 +11,7 @@ const StyledMuiBackdrop = withStyles(theme => ({
   }
 }))(MuiBackdrop);
 
-interface ILoadingOverlay {
+type TLoadingOverlay = {
   /** Delay in milliseconds */
   delay?: number;
 }
@@ -20,7 +20,7 @@ interface ILoadingOverlay {
  * Whole screen overlay loading indicator. Preconfigured center already
  * adjusted for AppDrawer width
  */
-const LoadingOverlay: React.FC<ILoadingOverlay> = ({ delay = 200, children, ...restProps }) => {
+const LoadingOverlay: React.FC<TLoadingOverlay> = ({ delay = 200, children, ...restProps }) => {
   const theme = useTheme();
 
   return (

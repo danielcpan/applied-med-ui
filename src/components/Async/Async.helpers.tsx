@@ -1,12 +1,12 @@
 import { getIsLoading, getIsFetching, getHasError, getHasData } from 'utils/react-query.utils';
 import { isFunction } from 'utils/general.utils';
 
-interface IGetHookVals {
+type TGetHookVals = {
   queries: any;
   mutations: any;
 }
 
-export const getHookVals = ({ queries, mutations }: IGetHookVals) => {
+export const getHookVals = ({ queries, mutations }: TGetHookVals) => {
   const queryVals = Object.values(queries);
   const mutationVals = Object.values(mutations);
   const hookVals = [...queryVals, ...mutationVals];
@@ -14,7 +14,7 @@ export const getHookVals = ({ queries, mutations }: IGetHookVals) => {
   return { hookVals, queryVals, mutationVals };
 };
 
-interface IGetComponentState {
+type TGetComponentState = {
   isLoading?: boolean | (() => boolean) | any;
   isFetching?: boolean | (() => boolean) | any;
   hasError?: boolean | (() => boolean) | any;
@@ -22,21 +22,21 @@ interface IGetComponentState {
   hookVals: any;
 }
 
-export const getComponentIsLoading = ({ isLoading, hookVals }: IGetComponentState) => {
+export const getComponentIsLoading = ({ isLoading, hookVals }: TGetComponentState) => {
   if (isLoading !== undefined) {
     return (isFunction(isLoading) && isLoading()) || isLoading;
   }
 
   return getIsLoading(hookVals);
 };
-export const getComponentIsFetching = ({ isFetching, hookVals }: IGetComponentState) => {
+export const getComponentIsFetching = ({ isFetching, hookVals }: TGetComponentState) => {
   if (isFetching !== undefined) {
     return (isFunction(isFetching) && isFetching()) || isFetching;
   }
 
   return getIsFetching(hookVals);
 };
-export const getComponentHasError = ({ hasError, hookVals }: IGetComponentState) => {
+export const getComponentHasError = ({ hasError, hookVals }: TGetComponentState) => {
   if (hasError !== undefined) {
     return (isFunction(hasError) && hasError()) || hasError;
   }
@@ -44,7 +44,7 @@ export const getComponentHasError = ({ hasError, hookVals }: IGetComponentState)
   return getHasError(hookVals);
 };
 
-export const getComponentHasData = ({ hasData, hookVals }: IGetComponentState) => {
+export const getComponentHasData = ({ hasData, hookVals }: TGetComponentState) => {
   if (hasData !== undefined) {
     return (isFunction(hasData) && hasData()) || hasData;
   }

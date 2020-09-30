@@ -16,13 +16,13 @@ const FormControlLabel = withStyles(theme => ({
   }
 }))(MuiFormControlLabel);
 
-interface IRadio {
+type TRadio = {
   value: string;
   label: string;
   description?: string;
 }
 
-const Radio: React.FC<IRadio> = ({ value, label, description }) => (
+const Radio: React.FC<TRadio> = ({ value, label, description }) => (
   <FormControlLabel
     value={`${value}`}
     control={<MuiRadio color="primary" />}

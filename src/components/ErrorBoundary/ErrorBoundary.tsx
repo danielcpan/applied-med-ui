@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { flexRender } from 'utils/general.utils';
 
-interface IErrorBoundary {
+type TErrorBoundary = {
   fallback: any;
 }
 
-class ErrorBoundary extends Component<IErrorBoundary> {
+class ErrorBoundary extends Component<TErrorBoundary> {
   state = { error: null };
 
   static getDerivedStateFromError(error: Error) {

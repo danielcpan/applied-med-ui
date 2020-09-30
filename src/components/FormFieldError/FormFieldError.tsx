@@ -2,14 +2,14 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 
-interface IFormFieldError {
+type TFormFieldError = {
   error?: Error;
 }
 
 /**
  * Form field helper component that displays field error
  */
-const FormFieldError: React.FC<IFormFieldError> = ({ error = {} }) => {
+const FormFieldError: React.FC<TFormFieldError> = ({ error = {} }) => {
   const theme = useTheme();
 
   return (

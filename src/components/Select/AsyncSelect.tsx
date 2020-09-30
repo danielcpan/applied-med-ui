@@ -4,7 +4,7 @@ import { Controller, useFormContext, UseFormMethods, ValidationRules } from 'rea
 import ReactSelectAsync from 'react-select/async';
 import { FormFieldError } from 'components';
 
-interface IAsyncSelect {
+type TAsyncSelect = {
   /** Registered field name in useForm */
   name: string;
   loadOptions: (input: any, callback: any) => void;
@@ -14,7 +14,7 @@ interface IAsyncSelect {
   rules?: ValidationRules;
 }
 
-const AsyncSelect: React.FC<IAsyncSelect> = ({ name, loadOptions, form, ...restProps }) => {
+const AsyncSelect: React.FC<TAsyncSelect> = ({ name, loadOptions, form, ...restProps }) => {
   const { control, errors } = form || useFormContext();
   const error = errors?.[name];
 

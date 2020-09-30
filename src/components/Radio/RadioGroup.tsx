@@ -2,14 +2,14 @@ import React from 'react';
 import { Controller, useFormContext, UseFormMethods } from 'react-hook-form';
 import { RadioGroup as MuiRadioGroup } from '@material-ui/core';
 
-interface IRadioGroupField {
+type TRadioGroupField = {
   /** Registered field name in useForm */
   name: string;
   /** Optional if using FormContext */
   form?: UseFormMethods<any>;
 }
 
-const RadioGroup: React.FC<IRadioGroupField> = ({ name, form, children, ...restProps }) => {
+const RadioGroup: React.FC<TRadioGroupField> = ({ name, form, children, ...restProps }) => {
   const { control } = form || useFormContext();
 
   return (

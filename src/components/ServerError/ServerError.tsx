@@ -2,11 +2,11 @@ import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 
-interface IServerError {
+type TServerError = {
   errors?: any;
 }
 
-const ServerError: React.FC<IServerError> = ({ errors }) => {
+const ServerError: React.FC<TServerError> = ({ errors }) => {
   const theme = useTheme();
 
   return (

@@ -15,14 +15,14 @@ import {
 import { getErrors } from 'utils/react-query.utils';
 import { flexRender } from 'utils/general.utils';
 
-interface IAsyncDefaultComponents {
+type TAsyncDefaultComponents = {
   Loading: React.ReactNode | string;
   Fetching: React.ReactNode | string;
   Error: React.ReactNode | string;
   NoData: React.ReactNode | string;
 }
 
-interface IAsync {
+type TAsync = {
   /** Computes queries state */
   queries?: any;
   /** Computes mutations state */
@@ -35,7 +35,7 @@ interface IAsync {
   /** Disable fetching indicator when not needed. Disabled by default */
   showFetching?: boolean;
   /** Injectable custom components: Loading, Fetching, Error, and NoData */
-  components?: IAsyncDefaultComponents;
+  components?: TAsyncDefaultComponents;
   children: (props: any) => React.ReactNode;
 }
 
@@ -43,7 +43,7 @@ interface IAsync {
  * Uses `react-query` to automatically compute states when supplied
  * a query or mutation. Fail safe as states are wrapped with an ErrorBoundary
  */
-const Async: React.FC<IAsync> = ({
+const Async: React.FC<TAsync> = ({
   queries = {},
   mutations = {},
   isLoading,

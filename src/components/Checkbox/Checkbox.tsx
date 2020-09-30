@@ -17,7 +17,7 @@ const FormControlLabel = withStyles(theme => ({
   }
 }))(MuiFormControlLabel);
 
-interface ICheckBox {
+type TCheckBox = {
   /** Registered field name in useForm */
   name: string;
   /** Optional if using FormContext */
@@ -30,7 +30,7 @@ interface ICheckBox {
   description?: string;
 }
 
-const Checkbox: React.FC<ICheckBox> = ({
+const Checkbox: React.FC<TCheckBox> = ({
   name,
   form,
   rules = {},

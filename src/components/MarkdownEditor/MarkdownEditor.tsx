@@ -37,7 +37,7 @@ const reducer = (state: any, action: any) => {
 
 const rowToHeight = (row: number) => row * 20 + 10;
 
-interface IMarkdownEditor {
+type TMarkdownEditor = {
   /** Registered field name in useForm */
   name: string;
   placeholder: string;
@@ -57,7 +57,7 @@ export const getContentLength = (content: any) => {
   return content.blocks.reduce((acc: number, el: any) => (acc += el.text.length), 0);
 };
 
-const MarkdownEditor: React.FC<IMarkdownEditor> = ({
+const MarkdownEditor: React.FC<TMarkdownEditor> = ({
   name,
   form,
   placeholder,

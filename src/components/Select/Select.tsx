@@ -48,7 +48,7 @@ MyCustomSelect.defaultProps = {
   }
 };
 
-interface ISelect {
+type TSelect = {
   /** Registered field name in useForm */
   name: string;
   options: [];
@@ -58,7 +58,7 @@ interface ISelect {
   rules?: ValidationRules;
 }
 
-const Select: React.FC<ISelect> = ({ name, options, form, ...restProps }) => {
+const Select: React.FC<TSelect> = ({ name, options, form, ...restProps }) => {
   const { control, errors } = form || useFormContext();
   const error = errors?.[name];
 

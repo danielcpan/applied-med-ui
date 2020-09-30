@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 
-interface IFormField {
+type TFormField =  {
   label: string;
   description?: string;
   /** Appends an optional tag to field */
@@ -11,7 +11,7 @@ interface IFormField {
 /**
  * Wrapper for field input components
  */
-const FormField: React.FC<IFormField> = ({ label, description, isOptional, children }) => {
+const FormField: React.FC<TFormField> = ({ label, description, isOptional, children }) => {
   return (
     <>
       <Typography gutterBottom style={{ fontWeight: 500 }} component="div">

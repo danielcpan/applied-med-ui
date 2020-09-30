@@ -1,6 +1,6 @@
 import { useDelayedRender } from 'hooks';
 
-interface IDelayedRenderProps {
+type TDelayedRenderProps = {
   /** Delay in milliseconds */
   delay?: number;
 }
@@ -8,7 +8,7 @@ interface IDelayedRenderProps {
  * Delays the rendering of it's children. Useful for preventing
  * loading/spinner flashes aka better user experience.
  */
-const DelayedRender: React.FC<IDelayedRenderProps> = ({ delay = 200, children }) => {
+const DelayedRender: React.FC<TDelayedRenderProps> = ({ delay = 200, children }) => {
   return useDelayedRender(delay)(() => children);
 };
 
