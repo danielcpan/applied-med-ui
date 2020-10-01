@@ -1,5 +1,5 @@
-import { getIsLoading, getIsFetching, getHasError, getHasData } from 'utils/react-query.utils';
-import { isFunction } from 'utils/general.utils';
+import { getIsLoading, getIsFetching, getHasError, getHasData } from '../../utils/react-query.utils';
+import { isFunction } from '../../utils/general.utils';
 
 type TGetHookVals = {
   queries: any;
