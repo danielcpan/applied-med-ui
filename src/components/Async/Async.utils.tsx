@@ -7,8 +7,8 @@ interface IGetHookVals {
 }
 
 export const getHookVals = ({ queries, mutations }: IGetHookVals) => {
-  const queryVals = Object.values(queries);
-  const mutationVals = Object.values(mutations);
+  const queryVals = Object.values(queries).filter((el: any) => el.status !== 'idle');
+  const mutationVals = Object.values(mutations).filter((el: any) => el.status !== 'idle');
   const hookVals = [...queryVals, ...mutationVals];
 
   return { hookVals, queryVals, mutationVals };
