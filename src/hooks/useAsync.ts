@@ -12,11 +12,9 @@ type TUseAsync = {
   queries?: any;
   /** Computes mutations state */
   mutations?: any;
-  onLoading: (props: any) => void;
-  onFetching: (props: any) => void;
-  onError: (props: any) => void;
-  onSuccess: (props: any) => void;
-  onSettled: (props: any) => void;
+  onError?: (props: any) => void;
+  onSuccess?: (props: any) => void;
+  onSettled?: (props: any) => void;
 };
 
 /**
@@ -26,12 +24,10 @@ type TUseAsync = {
 const useAsync = ({
   queries = {},
   mutations = {},
-  onLoading,
-  onFetching,
   onError,
   onSuccess,
   onSettled
-}: TUseAsync) => {
+}: TUseAsync = {}) => {
   const { hookVals } = getHookVals({ queries, mutations });
 
   const isLoading = hookVals.some((el: any) => el.isLoading);
@@ -41,13 +37,11 @@ const useAsync = ({
   const hasSettled = !isLoading && !isFetching;
   const status = getStatus(isLoading, hasError, isSuccess);
 
-  isLoading && onLoading && onLoading({ queries, mutations });
-  isFetching && onFetching && onFetching({ queries, mutations });
   hasError && onError && onError({ queries, mutations });
   isSuccess && onSuccess && onSuccess({ queries, mutations });
-  hasSettled && onSettled({ queries, mutations });
+  hasSettled && onSettled && onSettled({ queries, mutations });
 
-  return { status, isLoading, isFetching, isError: hasError, isSuccess };
+  return { isLoading, isFetching, hasError, isSuccess, hasSettled, status };
 };
 
 export default useAsync;
