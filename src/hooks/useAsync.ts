@@ -33,7 +33,7 @@ const useAsync = ({
   const isLoading = hookVals.some((el: any) => el.isLoading);
   const isFetching = hookVals.some((el: any) => el.isFetching);
   const hasError = hookVals.some((el: any) => el.isError);
-  const isSuccess = hookVals.every((el: any) => el.isSuccess);
+  const isSuccess = !!hookVals.length && hookVals.every((el: any) => el.isSuccess);
   const status = getStatus(isLoading, hasError, isSuccess);
   const hasSettled = !isLoading && !isFetching && status !== 'idle';
 
