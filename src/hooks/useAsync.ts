@@ -41,7 +41,7 @@ const useAsync = ({
   isSuccess && onSuccess && onSuccess({ queries, mutations });
   hasSettled && onSettled && onSettled({ queries, mutations });
 
-  return { isLoading, isFetching, hasError, isSuccess, hasSettled, status };
+  return { isLoading, isFetching, hasError, isSuccess, hasSettled, status, queries, mutations };
 };
 
 export default useAsync;
