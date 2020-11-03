@@ -61,6 +61,7 @@
     "react-is": "^16.13.1",
     "react-query": "^2.4.19",
     "react-window": "^1.8.5",
+    "react-hook-form": "^6.9.6",
     "rollup": "^2.18.2",
     "rollup-plugin-peer-deps-external": "^2.2.3",
     "rollup-plugin-terser": "^6.1.0",
