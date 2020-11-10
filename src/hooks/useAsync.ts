@@ -28,7 +28,7 @@ const useAsync = ({
   onSuccess,
   onSettled
 }: TUseAsync = {}) => {
-  const { hookVals } = getHookVals({ queries, mutations });
+  const { hookVals } = getHookVals({ queries, mutations }) as any;
 
   const isLoading = hookVals.some((el: any) => el.isLoading);
   const isFetching = hookVals.some((el: any) => el.isFetching);
