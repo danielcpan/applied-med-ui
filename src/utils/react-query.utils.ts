@@ -24,10 +24,10 @@ export const getHasError = (hook: any): boolean => {
 
 export const getHasData = (hook: any): boolean => {
   if (Array.isArray(hook)) {
-    return hook.every(el => el.data);
+    return hook.every(el => (Array.isArray(el.data) ? el.data.length > 0 : !!el.data));
   }
 
-  return !!hook.data;
+  return Array.isArray(hook.data) ? hook.data.length > 0 : !!hook.data;
 };
 
 export const getErrors = (hook: any): unknown => {
