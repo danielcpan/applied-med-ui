@@ -74,7 +74,7 @@ const AsyncAutocompleteBase: React.FC<any> = ({
         if (newInput.length > 1) optionsQuery.refetch();
       }, 400)}
       noOptionsQueryText={
-        optionsQuery.isError ? 'Opps! Something went wrong. Please try again later.' : 'No Options'
+        optionsQuery.isError ? 'Oops! Something went wrong. Please try again later.' : 'No Options'
       }
       {...restProps}
     />

@@ -22,7 +22,7 @@ const ServerError: React.FC<IServerError> = ({ errors }) => {
     >
       <Grid item xs={12} sm={11} md={10} lg={9}>
         <Typography style={{ color: 'red' }}>
-          Opps! Something went wrong. Please try again later.
+          Oops! Something went wrong. Please try again later.
         </Typography>
       </Grid>
     </Grid>
